@@ -1,0 +1,134 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    min-height: 100vh;
+    font-family: Hack, monospace;
+    background: #000000;
+}
+
+section
+{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+section::before
+{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#000,#ce0000,#000);
+    animation: animate 5s linear infinite;
+}
+@keyframes animate
+{
+    0%
+    {
+        transform: translateY(-100%);
+    }
+    100%
+    {
+        transform: translateY(100%);
+    }
+}
+section span
+{
+    position: relative;
+    display: block;
+    width: calc(6.25vw - 2px);
+    height: calc(6.25vw - 2px);
+    background: #181818;
+    z-index: 0;
+    transition: 1.5s;
+}
+section span:hover
+{
+    background: #ce0000;
+    transition: 0s;
+}
+.nav{
+    display: block;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    background: #000;
+}
+
+.profile{
+    margin-top: 50px;
+    padding-inline: 200px;
+    display: block;
+    position: relative;
+    z-index: 400;
+    width: 60%;
+    background: #000;
+
+}
+.profile p{
+    padding: 10px;
+    z-index: 1000;
+    color: #ffffff;
+    opacity: 1;
+}
+nav {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-inline: 25%;
+    position: relative;
+    z-index: 20;
+    .menuItems {
+        list-style: none;
+        display: flex;
+        /*flex-direction: row;*/
+        justify-content: space-between;
+        li {
+            /*margin-inline: 50px;*/
+            a {
+                text-decoration: none;
+                color: #ce0000;
+                font-size: 24px;
+                font-weight: 400;
+                transition: all 0.5s ease-in-out;
+                position: relative;
+                text-transform: uppercase;
+
+                &::before {
+                    content: attr(data-item);
+                    transition: 0.5s;
+                    color: #fff;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    width: 0;
+                    overflow: hidden;
+                }
+
+                &:hover {
+                    &::before {
+                        width: 100%;
+                        transition: all 0.5s ease-in-out;
+                    }
+                }
+            }
+        }
+    }
+}
+
