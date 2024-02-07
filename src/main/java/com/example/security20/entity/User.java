@@ -19,5 +19,7 @@ public class User {
     private String userName;
     private String password;
     private String roles = "ROLE_USER";
-
+    @OneToOne
+    @JoinColumn(name = "physicalParameters_id", referencedColumnName = "id")
+    private UserPhysicalParameters userPhysicalParameters;
 }

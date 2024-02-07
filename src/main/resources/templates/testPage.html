@@ -27,8 +27,36 @@
     <p>Имя: <span th:text="${firstName}"></span></p>
     <p>Фамилия: <span th:text="${lastName}"></span></p>
 <!--    <p>User ID: <span th:text="${user.id}"></span></p>-->
-
 </div>
+<form class="form" th:action="@{/update}" th:object="${physicalParameters}" method="post">
+    <div class="inputBox">
+        <input type="number" th:field="*{age}" name = "age"  required><i>Возраст</i>
+    </div>
+    <div class="inputBox">
+        <input type="number" th:field="*{weight}" name = "weight"  required><i>Вес</i>
+    </div>
+    <div class="inputBox">
+        <input type="number" th:field="*{height}" name = "height"  required><i>Рост</i>
+    </div>
+    <div class="inputBox">
+        <input type="number" th:field="*{armCircumference}" name = "armCircumference"  required><i>Обхват рук</i>
+    </div>
+    <div class="inputBox">
+        <input type="number" th:field="*{hipCircumference}" name = "hipCircumference"  required><i>Обхват бедер</i>
+    </div>
+    <div class="inputBox">
+        <input type="number" th:field="*{waistCircumference}" name = "waistCircumference"  required><i>Обхват талии</i>
+    </div>
+    <div class="inputBox">
+        <input type="date" th:field="*{date}" name = "date"  required><i>Дата</i>
+    </div>
+    <div class="inputBox">
+
+        <input type="submit" value="Сохранить">
+
+    </div>
+
+</form>
 <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
 </section>
 </body>

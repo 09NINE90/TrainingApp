@@ -2,6 +2,7 @@ package com.example.security20.service;
 
 import com.example.security20.dto.CustomUserDetails;
 import com.example.security20.dto.UserDTO;
+import com.example.security20.dto.UserPhysicalParametersDTO;
 import com.example.security20.entity.User;
 
 import java.util.List;
@@ -12,5 +13,6 @@ public interface UserService {
 
     List<UserDTO> findAllUsers();
 
+    UserPhysicalParametersDTO updatePhysicalParameters(UserPhysicalParametersDTO userPhysicalParametersDTO);
 
 }

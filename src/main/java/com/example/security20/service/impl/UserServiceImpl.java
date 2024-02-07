@@ -2,8 +2,11 @@ package com.example.security20.service.impl;
 
 import com.example.security20.dto.CustomUserDetails;
 import com.example.security20.dto.UserDTO;
+import com.example.security20.dto.UserPhysicalParametersDTO;
 import com.example.security20.entity.User;
+import com.example.security20.entity.UserPhysicalParameters;
 import com.example.security20.mapper.UserMapper;
+import com.example.security20.repository.UserPhysicalParametersRepository;
 import com.example.security20.repository.UserRepository;
 import com.example.security20.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +23,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
+    private final UserPhysicalParametersRepository physicalParametersRepository;
     private final UserMapper mapper;
     private final PasswordEncoder encoder;
     @Override
@@ -37,6 +41,14 @@ public class UserServiceImpl implements UserService {
         return users.stream()
                 .map(mapper::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public UserPhysicalParametersDTO updatePhysicalParameters(UserPhysicalParametersDTO userPhysicalParametersDTO) {
+        UserPhysicalParameters physicalParametersToSave = mapper.convertToEntity(userPhysicalParametersDTO);
+        UserPhysicalParameters savedPhysicalParameters = physicalParametersRepository.save(physicalParametersToSave);
+
+        return mapper.convertToDto(savedPhysicalParameters);
     }
 
 }
