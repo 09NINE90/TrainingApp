@@ -1,18 +1,14 @@
 package com.example.security20.service;
 
-import com.example.security20.dto.CustomUserDetails;
 import com.example.security20.dto.UserDTO;
-import com.example.security20.dto.UserPhysicalParametersDTO;
-import com.example.security20.entity.User;
+import com.example.security20.entity.UserPhysicalParameters;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
     UserDTO createUser(UserDTO userDTO);
 
     List<UserDTO> findAllUsers();
-
-    UserPhysicalParametersDTO updatePhysicalParameters(UserPhysicalParametersDTO userPhysicalParametersDTO);
+    void saveUserPhysicalParameters(UserPhysicalParameters userPhysicalParameters);
 
 }
