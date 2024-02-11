@@ -11,85 +11,41 @@
     <link rel="stylesheet" th:href="@{/css/logintest.css}">
 </head>
 <body>
-
 <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
 
     <div class="signin">
 
         <div class="content">
 
-            <h2>регистрация</h2>
-            <form class="form" th:action="@{/user/create}" th:object="${user}"  method="post">
+            <h2>физические параметры</h2>
+            <form class="form" th:action="@{/api/v1/createPhysicalParameters}"  th:object="${userPhysicalParameters}" method="post">
 
                 <div class="inputBox">
-                    <input type="text" th:field="*{firstName}" name = "firstname"  required><i>Имя</i>
+                    <input type="number" th:field="*{age}"  name="age" required><i>Возраст</i>
                 </div>
                 <div class="inputBox">
-                    <input type="text" th:field="*{lastName}" name = "lastName"  required><i>Фамилия</i>
+                    <input type="number" th:field="*{weight}" name="weight" required><i>Вес (кг)</i>
                 </div>
                 <div class="inputBox">
-                    <input type="email" th:field="*{userName}" name = "email"  required><i>Email</i>
+                    <input type="number" th:field="*{height}" name="height" required><i>Рост (см)</i>
                 </div>
                 <div class="inputBox">
-                    <input type="password" th:field="*{password}" name = "password"  required><i>Пароль</i>
+                    <input type="number" th:field="*{armCircumference}" name="armCircumference" required><i>Обхват рук (см)</i>
                 </div>
                 <div class="inputBox">
-                    <input type="password" th:field="*{confirmPassword}" name = "confirmPassword"  required><i>Подтвендите пароль</i>
+                    <input type="number" th:field="*{hipCircumference}" name="hipCircumference" required><i>Обхват бедра (см)</i>
+                </div>
+                <div class="inputBox">
+                    <input type="number" th:field="*{waistCircumference}" name="waistCircumference" required><i>Обхват талии (см)</i>
                 </div>
                 <div class="inputBox">
 
-                    <input type="submit" value="зарегистрироваться">
+                    <input type="submit" value="добавить">
 
                 </div>
             </form>
-
         </div>
-
     </div>
-
-</section> <!-- partial -->
-
+</section>
 </body>
-<!--<body>-->
-
-<!--<div class="main">-->
-<!--    <section class="signup">-->
-<!--        <div class="container m-5" >-->
-<!--            <div class="signup-content">-->
-<!--                <form th:action="@{/user/create}" th:object="${user}" method="post" id="signup-form" class="signup-form">-->
-<!--                    <h2 class="form-title">Create an account</h2>-->
-<!--                    <div class="form-group">-->
-<!--                        <input type="text"  class="form-input" th:field="*{firstName}" name="firstname" id="firstname" placeholder="First Name" required/>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <input type="text" class="form-input" th:field="*{lastName}" name="lastname" id="lastname" placeholder="Last Name"/>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <input type="email"  class="form-input" th:field="*{userName}" name="email" id="email" placeholder="Your Email" required/>-->
-<!--                    </div>-->
-
-<!--                    <div class="form-group">-->
-<!--                        <input type="password"  class="form-input" th:field="*{password}" name="password" id="password" placeholder="Password" required/>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <input type="password"  class="form-input" th:field="*{confirmPassword}" name="re_password" id="re_password" placeholder="Confirm password" required/>-->
-<!--                    </div>-->
-
-
-<!--                    <div class="form-group">-->
-<!--                        <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--                <p class="loginhere">-->
-<!--                    Have already an account? <a th:href="@{/login}" class="loginhere-link">Login here</a>-->
-<!--                </p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </section>-->
-<!--</div>-->
-
-
-<!--&lt;!&ndash;<script th:src="@{/js/jquery.signup.js}"></script>&ndash;&gt;-->
-<!--&lt;!&ndash;<script th:src="@{/js/signup.js}"></script>&ndash;&gt;-->
-<!--</body>-->
 </html>

@@ -14,49 +14,52 @@
 <div class="nav">
     <nav>
         <ul class="menuItems">
-            <li><a href='#' data-item='главная'>главная</a></li>
+            <li><a href='/api/v1/home' data-item='главная'>главная</a></li>
             <li><a href='#' data-item='тренировки'>тренировки</a></li>
             <li><a href='#' data-item='питание'>питание</a></li>
             <li><a href='#' data-item='контакты'>контакты</a></li>
+            <li><a href='/logout' data-item='выйти'>выйти</a></li>
+
         </ul>
     </nav>
 </div>
 <div class="profile">
-    <p>User ID: <span th:text="${userId}"></span></p>
-    <p>Email: <span th:text="${username}"></span></p>
-    <p>Имя: <span th:text="${firstName}"></span></p>
-    <p>Фамилия: <span th:text="${lastName}"></span></p>
-<!--    <p>User ID: <span th:text="${user.id}"></span></p>-->
+    <div class="contact">
+        <!--    <p>User ID: <span th:text="${userId}"></span></p>-->
+        <p>Email: <span th:text="${username}"></span></p>
+        <p>Имя: <span th:text="${firstName}"></span></p>
+        <p>Фамилия: <span th:text="${lastName}"></span></p>
+        <!--    <p>Возраст: <span th:text="${age}"></span></p>-->
+    </div>
+    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <a href='/api/v1/createPhysicalParameters' data-item='Добавить данные в таблицу'>Добавить данные в таблицу</a>
+    </div>
+    <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <thead>
+        <tr>
+            <th>Возраст</th>
+            <th>Рост (см)</th>
+            <th>Вес (кг)</th>
+            <th>Обхват рук (см)</th>
+            <th>Обхват бедра (см)</th>
+            <th>Обхват талии (см)</th>
+            <!-- Добавьте другие колонки по необходимости -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="physicalParameters : ${userPhysicalParametersList}">
+            <td th:text="${physicalParameters.age}"></td>
+            <td th:text="${physicalParameters.height}"></td>
+            <td th:text="${physicalParameters.weight}"></td>
+            <td th:text="${physicalParameters.armCircumference}"></td>
+            <td th:text="${physicalParameters.hipCircumference}"></td>
+            <td th:text="${physicalParameters.waistCircumference}"></td>
+            <!-- Добавьте другие ячейки по необходимости -->
+        </tr>
+        </tbody>
+    </table>
 </div>
-<form class="form" th:action="@{/update}" th:object="${physicalParameters}" method="post">
-    <div class="inputBox">
-        <input type="number" th:field="*{age}" name = "age"  required><i>Возраст</i>
-    </div>
-    <div class="inputBox">
-        <input type="number" th:field="*{weight}" name = "weight"  required><i>Вес</i>
-    </div>
-    <div class="inputBox">
-        <input type="number" th:field="*{height}" name = "height"  required><i>Рост</i>
-    </div>
-    <div class="inputBox">
-        <input type="number" th:field="*{armCircumference}" name = "armCircumference"  required><i>Обхват рук</i>
-    </div>
-    <div class="inputBox">
-        <input type="number" th:field="*{hipCircumference}" name = "hipCircumference"  required><i>Обхват бедер</i>
-    </div>
-    <div class="inputBox">
-        <input type="number" th:field="*{waistCircumference}" name = "waistCircumference"  required><i>Обхват талии</i>
-    </div>
-    <div class="inputBox">
-        <input type="date" th:field="*{date}" name = "date"  required><i>Дата</i>
-    </div>
-    <div class="inputBox">
 
-        <input type="submit" value="Сохранить">
-
-    </div>
-
-</form>
 <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
 </section>
 </body>

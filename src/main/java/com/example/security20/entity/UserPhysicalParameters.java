@@ -1,11 +1,18 @@
 package com.example.security20.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "user_physical_parameters")
 public class UserPhysicalParameters {
     @Id
@@ -24,8 +31,8 @@ public class UserPhysicalParameters {
 
     private double waistCircumference; //Обхват талии
 
-    private String date; //Дата обновления параметров
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    private LocalDate date; //Дата обновления параметров
+
+    private Long userId;
+
 }

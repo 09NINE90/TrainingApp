@@ -71,13 +71,18 @@ section span:hover
 }
 
 .profile{
+    padding-top: 20px;
+    padding-bottom: 200px;
     margin-top: 50px;
     padding-inline: 200px;
-    display: block;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     position: relative;
     z-index: 400;
     width: 60%;
     background: #000;
+    border-radius: 20px;
 
 }
 .profile p{
@@ -85,6 +90,23 @@ section span:hover
     z-index: 1000;
     color: #ffffff;
     opacity: 1;
+}
+
+
+.profile .add_btn{
+    padding: 10px;
+}
+.profile .add_btn a{
+    text-decoration: none;
+    text-transform: uppercase;
+    background: #ce0000;
+    border-radius: 3px;
+    color: white;
+    padding: 7px;
+}
+.profile table{
+    color: #ffffff;
+    z-index: 9999;
 }
 nav {
     padding-top: 15px;
@@ -132,3 +154,23 @@ nav {
     }
 }
 
+table{
+    padding-top: 20px;
+}
+th {
+    font-size: 13px;
+    font-weight: normal;
+    background: #000;
+    border-top: 4px solid #fff;
+    border-bottom: 1px solid white;
+    color: #ffffff;
+    padding: 8px;
+}
+td {
+    background: #181818;
+    border-bottom: 1px solid white;
+    color: #fff;
+    border-top: 1px solid;
+    border: white;
+    padding: 8px;
+}

@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.ToString;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "security_user")
@@ -19,7 +22,7 @@ public class User {
     private String userName;
     private String password;
     private String roles = "ROLE_USER";
-    @OneToOne
-    @JoinColumn(name = "physicalParameters_id", referencedColumnName = "id")
-    private UserPhysicalParameters userPhysicalParameters;
+
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<UserPhysicalParameters> userPhysicalParameters = new ArrayList<UserPhysicalParameters>();
 }
