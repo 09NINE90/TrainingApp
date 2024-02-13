@@ -44,7 +44,7 @@ public class HomeController {
         model.addAttribute("firstName", userDetails.getFirstName());
         model.addAttribute("lastName", userDetails.getLastName());
 
-        List<UserDTO> usersList = userService.findAllUsers();
+        List<User> usersList = userService.findAllUsers();
         model.addAttribute("usersList", usersList);
 
         return "testPage";
@@ -60,9 +60,9 @@ public class HomeController {
         return "signup";
     }
     @PostMapping("/create")
-    public String userSave(@ModelAttribute("user") UserDTO userDTO, Model model){
-        userService.createUser(userDTO);
-        List<UserDTO> usersList = userService.findAllUsers();
+    public String userSave(@ModelAttribute("user") User user, Model model){
+        userService.createUser(user);
+        List<User> usersList = userService.findAllUsers();
         model.addAttribute("usersList", usersList);
         return "testPage";
     }

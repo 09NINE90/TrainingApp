@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
+    <title>Страница пользователя</title>
     <link rel="stylesheet" th:href="@{/css/test.css}">
     <link
             rel="stylesheet"
@@ -11,30 +11,13 @@
     />
 </head>
 <body>
-<div class="nav">
-    <nav>
-        <ul class="menuItems">
-            <li><a href='/api/v1/home' data-item='главная'>главная</a></li>
-            <li><a href='#' data-item='тренировки'>тренировки</a></li>
-            <li><a href='#' data-item='питание'>питание</a></li>
-            <li><a href='#' data-item='контакты'>контакты</a></li>
-            <li><a href='/logout' data-item='выйти'>выйти</a></li>
-
-        </ul>
-    </nav>
-</div>
 <div class="profile">
     <div class="contact">
-        <!--    <p>User ID: <span th:text="${userId}"></span></p>-->
-        <p>Email: <span th:text="${username}"></span></p>
-        <p>Имя: <span th:text="${firstName}"></span></p>
-        <p>Фамилия: <span th:text="${lastName}"></span></p>
-        <!--    <p>Возраст: <span th:text="${age}"></span></p>-->
+        <p>Имя: <span th:text="${user.firstName}"></span></p>
+        <p>Фамилия: <span th:text="${user.lastName}"></span></p>
+        <p>Email: <span th:text="${user.userName}"></span></p>
     </div>
-    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
-        <a href='/api/v1/createPhysicalParameters' data-item='Добавить данные в таблицу'>Добавить данные в таблицу</a>
-    </div>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+    <table th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
         <thead>
         <tr>
             <th>Возраст</th>
@@ -58,35 +41,9 @@
         </tr>
         </tbody>
     </table>
-    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-        <a href='/api/v1/create' data-item='Добавить пользователя'>Добавить пользователя</a>
-    </div>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-        <thead>
-        <tr>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Email</th>
-            <th>Телефон</th>
-            <th>Информация</th>
-            <!-- Добавьте другие колонки по необходимости -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${usersList}">
-            <td th:text="${user.firstName}"></td>
-            <td th:text="${user.lastName}"></td>
-            <td th:text="${user.userName}"></td>
-            <td th:text="${user.phoneNumber}"></td>
-            <td><a th:href="@{'/user/' + ${user.id}}"><span>Перейти</span></a></td>
-            <!-- Добавьте другие ячейки по необходимости -->
-        </tr>
-        </tbody>
-    </table>
 </div>
 
 <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
 </section>
 </body>
 </html>
-
