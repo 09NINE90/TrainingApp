@@ -19,23 +19,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@Controller
-@RequiredArgsConstructor
-@RequestMapping("/user")
-public class UserController {
-    private final UserService userService;
-    @Autowired
-    private UserPhysicalParametersRepository userPhysicalParametersRepository;
-    @GetMapping("/create")
-    public String userCreate(Model model){
-        model.addAttribute("user",new UserDTO());
-        return "signup";
-    }
-    @PostMapping("/create")
-    public String userSave(@ModelAttribute("user") UserDTO userDTO){
-        userService.createUser(userDTO);
-        return "redirect:/login";
-    }
-
-}
-
+//@Controller
+//@RequiredArgsConstructor
+//@RequestMapping("/user")
+//public class UserController {
+//    private final UserService userService;
+//    @Autowired
+//    private UserPhysicalParametersRepository userPhysicalParametersRepository;
+//    @GetMapping("/create")
+//    public String userCreate(Model model){
+//        model.addAttribute("user",new UserDTO());
+//        return "signup";
+//    }
+//    @PostMapping("/create")
+//    public String userSave(@ModelAttribute("user") UserDTO userDTO){
+//        userService.createUser(userDTO);
+//        return "redirect:/login";
+//    }
+//
+//}
+//

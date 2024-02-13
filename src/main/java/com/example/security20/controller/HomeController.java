@@ -44,6 +44,8 @@ public class HomeController {
         model.addAttribute("firstName", userDetails.getFirstName());
         model.addAttribute("lastName", userDetails.getLastName());
 
+        List<UserDTO> usersList = userService.findAllUsers();
+        model.addAttribute("usersList", usersList);
 
         return "testPage";
     }
@@ -51,6 +53,18 @@ public class HomeController {
     public String createPhysicalParameters(Model model){
         model.addAttribute("userPhysicalParameters",new UserPhysicalParameters());
         return "formPhys";
+    }
+    @GetMapping("/create")
+    public String userCreate(Model model){
+        model.addAttribute("user",new UserDTO());
+        return "signup";
+    }
+    @PostMapping("/create")
+    public String userSave(@ModelAttribute("user") UserDTO userDTO, Model model){
+        userService.createUser(userDTO);
+        List<UserDTO> usersList = userService.findAllUsers();
+        model.addAttribute("usersList", usersList);
+        return "testPage";
     }
     @PostMapping("/createPhysicalParameters")
     public String createPhysicalParameters(Authentication authentication, @ModelAttribute("userPhysicalParameters") UserPhysicalParameters userPhysicalParameters, Model model) {

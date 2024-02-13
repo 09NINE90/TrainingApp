@@ -19,7 +19,7 @@
         <div class="content">
 
             <h2>регистрация</h2>
-            <form class="form" th:action="@{/user/create}" th:object="${user}"  method="post">
+            <form class="form" th:action="@{/api/v1/create}" th:object="${user}"  method="post">
 
                 <div class="inputBox">
                     <input type="text" th:field="*{firstName}" name = "firstname"  required><i>Имя</i>
@@ -29,6 +29,9 @@
                 </div>
                 <div class="inputBox">
                     <input type="email" th:field="*{userName}" name = "email"  required><i>Email</i>
+                </div>
+                <div class="inputBox">
+                    <input type="tel" th:field="*{phoneNumber}" name = "phoneNumber"  required><i>Номер телефона</i>
                 </div>
                 <div class="inputBox">
                     <input type="password" th:field="*{password}" name = "password"  required><i>Пароль</i>
