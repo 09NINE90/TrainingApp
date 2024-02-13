@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 
@@ -31,7 +32,7 @@ public class UserPhysicalParameters {
 
     private double waistCircumference; //Обхват талии
 
-    private LocalDate date; //Дата обновления параметров
+    private String date; //Дата обновления параметров
 
     private Long userId;
 

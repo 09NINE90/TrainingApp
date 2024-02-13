@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -79,6 +80,8 @@ public class HomeController {
         userPhysicalParameters.setUserId(userId);
 
         try {
+            String date = userPhysicalParameters.getDate();
+            userPhysicalParameters.setDate(date);
             userService.saveUserPhysicalParameters(userPhysicalParameters);
             List<UserPhysicalParameters> userPhysicalParametersList = userPhysicalParametersRepository.findPhysicalParametersByUserId(userId);
             model.addAttribute("userPhysicalParametersList", userPhysicalParametersList);
