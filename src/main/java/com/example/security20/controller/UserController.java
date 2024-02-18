@@ -37,6 +37,12 @@ public class UserController {
         model.addAttribute("userPhysicalParametersList", userPhysicalParametersList);
         return "userPage";
     }
+    @GetMapping("/delete/{userId}")
+    public String userDelete(@PathVariable("userId") Long id, Model model){
+        userService.deleteUser(id);
+        return "redirect:/api/v1/home";
+    }
+
 
 }
 

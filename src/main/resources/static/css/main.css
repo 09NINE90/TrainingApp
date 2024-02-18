@@ -15,6 +15,11 @@ body {
     background: #000000;
 }
 
+a{
+    text-decoration: none;
+    color: #fff;
+}
+
 section
 {
     position: absolute;
@@ -157,20 +162,21 @@ nav {
 table{
     padding-top: 20px;
 }
+
 th {
     font-size: 13px;
     font-weight: normal;
     background: #000;
     border-top: 4px solid #fff;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #ece3e3;
     color: #ffffff;
     padding: 8px;
 }
 td {
     background: #181818;
-    border-bottom: 1px solid white;
+    /*border-bottom: 1px solid white;*/
     color: #fff;
     border-top: 1px solid;
-    border: white;
+    text-align: center;
     padding: 8px;
 }

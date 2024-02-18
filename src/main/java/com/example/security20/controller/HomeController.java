@@ -8,20 +8,13 @@ import com.example.security20.repository.UserPhysicalParametersRepository;
 import com.example.security20.repository.UserRepository;
 import com.example.security20.service.UserService;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -48,7 +41,7 @@ public class HomeController {
         List<User> usersList = userService.findAllUsers();
         model.addAttribute("usersList", usersList);
 
-        return "testPage";
+        return "mainPage";
     }
     @GetMapping("/createPhysicalParameters")
     public String createPhysicalParameters(Model model){
@@ -65,7 +58,7 @@ public class HomeController {
         userService.createUser(user);
         List<User> usersList = userService.findAllUsers();
         model.addAttribute("usersList", usersList);
-        return "testPage";
+        return "mainPage";
     }
     @PostMapping("/createPhysicalParameters")
     public String createPhysicalParameters(Authentication authentication, @ModelAttribute("userPhysicalParameters") UserPhysicalParameters userPhysicalParameters, Model model) {
@@ -83,19 +76,12 @@ public class HomeController {
             String date = userPhysicalParameters.getDate();
             userPhysicalParameters.setDate(date);
             userService.saveUserPhysicalParameters(userPhysicalParameters);
-            List<UserPhysicalParameters> userPhysicalParametersList = userPhysicalParametersRepository.findPhysicalParametersByUserId(userId);
-            model.addAttribute("userPhysicalParametersList", userPhysicalParametersList);
-            model.addAttribute("userId", userId);
-            model.addAttribute("username", user.getUserName());
-            model.addAttribute("firstName", user.getFirstName());
-            model.addAttribute("lastName", user.getLastName());
             // Возврат результата или представления с информацией о сохраненных параметрах
-            return "testPage";
+            return "redirect:/api/v1/home";
         } catch (DataIntegrityViolationException e) {
             // Обработка исключения при сохранении в базу данных
             System.out.println("Обработка исключения при сохранении в базу данных");
             return "errorPage";
         }
     }
-
 }
