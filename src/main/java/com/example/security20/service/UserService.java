@@ -13,5 +13,6 @@ public interface UserService {
     public List<User> findAllUsers() ;
     void saveUserPhysicalParameters(UserPhysicalParameters userPhysicalParameters);
     public Optional<User> getUserById(Long id);
+    void deleteUser(Long id);
 
 }
