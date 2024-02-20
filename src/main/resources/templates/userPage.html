@@ -49,6 +49,7 @@
     <table th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
         <thead>
         <tr>
+            <th>Удаление тренировки</th>
             <th>Название тренировки</th>
             <th>Упражнение</th>
             <th>Повторения</th>
@@ -59,6 +60,7 @@
         <tbody>
         <th:block th:each="workoutPlan : ${workoutPlans}">
             <tr>
+                <td rowspan="6"><a th:href="@{'/api/v1/deleteWorkoutPlan/' + ${workoutPlan.id} + '/' + ${user.id}}">Удалить</a></td>
                 <td th:text="${workoutPlan.dayOfWeek}" rowspan="6"></td>
                 <td th:text="${workoutPlan.exercises1}"></td>
                 <td th:text="${workoutPlan.repetitions1}"></td>
@@ -90,6 +92,33 @@
             </tr>
 
         </th:block>
+        </tbody>
+    </table>
+
+    <table th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+        <thead>
+        <tr>
+            <th>Название продукта</th>
+            <th>Вес (г)</th>
+            <th>Калорийность</th>
+            <th>Белки (г)</th>
+            <th>Жиры (г)</th>
+            <th>Углеводы (г)</th>
+            <th>Дата и время приема пищи</th>
+            <!-- Добавьте другие колонки по необходимости -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="nutrition : ${nutritionList}">
+            <td th:text="${nutrition.food}"></td>
+            <td th:text="${nutrition.weight}"></td>
+            <td th:text="${nutrition.calories}"></td>
+            <td th:text="${nutrition.proteins}"></td>
+            <td th:text="${nutrition.fats}"></td>
+            <td th:text="${nutrition.carbohydrates}"></td>
+            <td th:text="${nutrition.date}"></td>
+            <!-- Добавьте другие ячейки по необходимости -->
+        </tr>
         </tbody>
     </table>
 </div>

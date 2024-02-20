@@ -181,3 +181,78 @@ td {
     text-align: center;
     padding: 8px;
 }
+
+
+
+.form-container .form .inputBox
+{
+    margin-top: 5px;
+    position: relative;
+    width: 100px;
+}
+
+.form-container .form .inputBox input
+{
+    position: relative;
+    width: 100%;
+    background: #333;
+    border: none;
+    outline: none;
+    padding: 25px 10px 7.5px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1em;
+}
+.form-container .form .inputBox i
+{
+    position: absolute;
+    left: 0;
+    padding: 15px 10px;
+    font-style: normal;
+    color: #aaa;
+    transition: 0.5s;
+    pointer-events: none;
+}
+.form-container .form .inputBox input:focus ~ i,
+.form-container .form .inputBox input:valid ~ i
+{
+    transform: translateY(-7.5px);
+    font-size: 0.8em;
+    color: #fff;
+}
+
+.form-container .form .inputBox input[type="submit"]
+{
+    padding: 10px;
+    background: #ce0000;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 400;
+    font-size: 1.35em;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+}
+input[type="submit"]:hover{
+    opacity: 0.6;
+}
+input[type="submit"]:active
+{
+    opacity: 0.6;
+}
+@media (max-width: 900px)
+{
+    section span
+    {
+        width: calc(10vw - 2px);
+        height: calc(10vw - 2px);
+    }
+}
+@media (max-width: 600px)
+{
+    section span
+    {
+        width: calc(20vw - 2px);
+        height: calc(20vw - 2px);
+    }
+}

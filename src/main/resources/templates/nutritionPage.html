@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тренрировки</title>
+    <title>Питание</title>
     <link rel="stylesheet" th:href="@{/css/main.css}">
     <link
             rel="stylesheet"
@@ -24,51 +24,64 @@
     </nav>
 </div>
 <div class="profile">
+    <div class="form-container">
+        <form class="form" th:action="@{/api/v1/addNutrition}"  th:object="${nutrition}" method="post">
+
+            <div class="inputBox">
+                <input type="text" th:field="*{food}"  name="food" required><i>Название продукта</i>
+            </div>
+            <div class="inputBox">
+                <input type="number" step="0.01" th:field="*{weight}" name="weight" required><i>Вес (г)</i>
+            </div>
+            <div class="inputBox">
+                <input type="number" step="0.01" th:field="*{calories}" name="calories" required><i>Калорийность (на 100 г продукта)</i>
+            </div>
+            <div class="inputBox">
+                <input type="number" step="0.01" th:field="*{proteins}" name="proteins" required><i>Белки (г/100 г продукта)</i>
+            </div>
+            <div class="inputBox">
+                <input type="number" step="0.01" th:field="*{fats}" name="fats" required><i>Жиры (г/100 г продукта)</i>
+            </div>
+            <div class="inputBox">
+                <input type="number" step="0.01" th:field="*{carbohydrates}" name="carbohydrates" required><i>Углеводы (г/100 г продукта)</i>
+            </div>
+            <div class="inputBox">
+                <input type="datetime-local" th:field="*{date}" name="date" required><i>Дата и время приема пищи</i>
+            </div>
+            <div class="inputBox">
+
+                <input type="submit" value="добавить">
+
+            </div>
+        </form>
+    </div>
 
     <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
         <thead>
         <tr>
-            <th>Название тренировки</th>
-            <th>Упражнение</th>
-            <th>Повторения</th>
-
+            <th>Название продукта</th>
+            <th>Вес (г)</th>
+            <th>Калорийность</th>
+            <th>Белки (г)</th>
+            <th>Жиры (г)</th>
+            <th>Углеводы (г)</th>
+            <th>Дата и время приема пищи</th>
+            <th>Удаление приема пищи</th>
             <!-- Добавьте другие колонки по необходимости -->
         </tr>
         </thead>
         <tbody>
-        <th:block th:each="workoutPlan : ${workoutPlans}">
-            <tr>
-                <td th:text="${workoutPlan.dayOfWeek}" rowspan="6"></td>
-                <td th:text="${workoutPlan.exercises1}"></td>
-                <td th:text="${workoutPlan.repetitions1}"></td>
-            </tr>
-            <tr>
-
-                <td th:text="${workoutPlan.exercises2}"></td>
-                <td th:text="${workoutPlan.repetitions2}"></td>
-            </tr>
-            <tr>
-
-                <td th:text="${workoutPlan.exercises3}"></td>
-                <td th:text="${workoutPlan.repetitions3}"></td>
-            </tr>
-            <tr>
-
-                <td th:text="${workoutPlan.exercises4}"></td>
-                <td th:text="${workoutPlan.repetitions4}"></td>
-            </tr>
-            <tr>
-
-                <td th:text="${workoutPlan.exercises5}"></td>
-                <td th:text="${workoutPlan.repetitions5}"></td>
-            </tr>
-            <tr>
-
-                <td th:text="${workoutPlan.exercises6}"></td>
-                <td th:text="${workoutPlan.repetitions6}"></td>
-            </tr>
-
-        </th:block>
+        <tr th:each="nutrition : ${nutritionList}">
+            <td th:text="${nutrition.food}"></td>
+            <td th:text="${nutrition.weight}"></td>
+            <td th:text="${nutrition.calories}"></td>
+            <td th:text="${nutrition.proteins}"></td>
+            <td th:text="${nutrition.fats}"></td>
+            <td th:text="${nutrition.carbohydrates}"></td>
+            <td th:text="${nutrition.date}"></td>
+            <td><a th:href="@{'/api/v1/deleteNutrition/' + ${nutrition.id}}">Удалить</a></td>
+            <!-- Добавьте другие ячейки по необходимости -->
+        </tr>
         </tbody>
     </table>
 </div>
