@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Страница пользователя</title>
+    <title>Главная</title>
     <link rel="stylesheet" th:href="@{/css/main.css}">
     <link
             rel="stylesheet"
@@ -11,42 +11,21 @@
     />
 </head>
 <body>
+<div class="nav">
+    <nav>
+        <ul class="menuItems">
+            <li><a href='/api/v1/home' data-item='главная'>главная</a></li>
+            <li><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></li>
+            <li><a href='#' data-item='питание'>питание</a></li>
+            <li><a href='#' data-item='контакты'>контакты</a></li>
+            <li><a href='/logout' data-item='выйти'>выйти</a></li>
+
+        </ul>
+    </nav>
+</div>
 <div class="profile">
-    <div class="contact">
-        <p>Имя: <span th:text="${user.firstName}"></span></p>
-        <p>Фамилия: <span th:text="${user.lastName}"></span></p>
-        <p>Email: <span th:text="${user.userName}"></span></p>
-    </div>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-        <thead>
-        <tr>
-            <th>Возраст</th>
-            <th>Рост (см)</th>
-            <th>Вес (кг)</th>
-            <th>Обхват рук (см)</th>
-            <th>Обхват бедра (см)</th>
-            <th>Обхват талии (см)</th>
-            <th>Дата</th>
-            <!-- Добавьте другие колонки по необходимости -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="physicalParameters : ${userPhysicalParametersList}">
-            <td th:text="${physicalParameters.age}"></td>
-            <td th:text="${physicalParameters.height}"></td>
-            <td th:text="${physicalParameters.weight}"></td>
-            <td th:text="${physicalParameters.armCircumference}"></td>
-            <td th:text="${physicalParameters.hipCircumference}"></td>
-            <td th:text="${physicalParameters.waistCircumference}"></td>
-            <td th:text="${physicalParameters.date}"></td>
-            <!-- Добавьте другие ячейки по необходимости -->
-        </tr>
-        </tbody>
-    </table>
-    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-        <a th:href="@{'/api/v1/setWorkoutPlan/' + ${user.id}}" data-item='Добавить план тренировок'>Добавить план тренировок</a>
-    </div>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+
+    <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
         <thead>
         <tr>
             <th>Название тренировки</th>
@@ -98,3 +77,4 @@
 </section>
 </body>
 </html>
+

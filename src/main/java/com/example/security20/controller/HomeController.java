@@ -4,10 +4,13 @@ import com.example.security20.dto.CustomUserDetails;
 import com.example.security20.dto.UserDTO;
 import com.example.security20.entity.User;
 import com.example.security20.entity.UserPhysicalParameters;
+import com.example.security20.entity.WorkoutPlan;
 import com.example.security20.repository.UserPhysicalParametersRepository;
 import com.example.security20.repository.UserRepository;
+import com.example.security20.repository.WorkoutPlanRepository;
 import com.example.security20.service.UserService;
 
+import com.example.security20.service.WorkoutPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
@@ -25,7 +28,9 @@ public class HomeController {
     @Autowired
     private UserPhysicalParametersRepository userPhysicalParametersRepository;
     @Autowired
-    private UserRepository userRepository;
+    WorkoutPlanService workoutPlanService;
+    @Autowired
+    private WorkoutPlanRepository workoutPlanRepository;
 
     @GetMapping("/home")
     public String getUserProfile(Authentication authentication, Model model) {
@@ -37,17 +42,12 @@ public class HomeController {
         model.addAttribute("username", userDetails.getUsername());
         model.addAttribute("firstName", userDetails.getFirstName());
         model.addAttribute("lastName", userDetails.getLastName());
-
         List<User> usersList = userService.findAllUsers();
         model.addAttribute("usersList", usersList);
 
         return "mainPage";
     }
-    @GetMapping("/createPhysicalParameters")
-    public String createPhysicalParameters(Model model){
-        model.addAttribute("userPhysicalParameters",new UserPhysicalParameters());
-        return "formPhys";
-    }
+
     @GetMapping("/create")
     public String userCreate(Model model){
         model.addAttribute("user",new UserDTO());
@@ -60,28 +60,5 @@ public class HomeController {
         model.addAttribute("usersList", usersList);
         return "mainPage";
     }
-    @PostMapping("/createPhysicalParameters")
-    public String createPhysicalParameters(Authentication authentication, @ModelAttribute("userPhysicalParameters") UserPhysicalParameters userPhysicalParameters, Model model) {
-        User user = userRepository.findByUserName(authentication.getName());
-        Long userId = user.getId();
-        if (user == null) {
-            // Обработка случая, когда пользователь не найден
-            System.out.println("Обработка случая, когда пользователь не найден");
-            return "errorPage";
-        }
 
-        userPhysicalParameters.setUserId(userId);
-
-        try {
-            String date = userPhysicalParameters.getDate();
-            userPhysicalParameters.setDate(date);
-            userService.saveUserPhysicalParameters(userPhysicalParameters);
-            // Возврат результата или представления с информацией о сохраненных параметрах
-            return "redirect:/api/v1/home";
-        } catch (DataIntegrityViolationException e) {
-            // Обработка исключения при сохранении в базу данных
-            System.out.println("Обработка исключения при сохранении в базу данных");
-            return "errorPage";
-        }
-    }
 }

@@ -15,4 +15,5 @@ public interface UserService {
     public Optional<User> getUserById(Long id);
     void deleteUser(Long id);
 
+    void deleteUserPhysicalParameters(Long id);
 }

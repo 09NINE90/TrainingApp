@@ -99,6 +99,7 @@ section span:hover
 
 
 .profile .add_btn{
+    margin-top: 20px;
     padding: 10px;
 }
 .profile .add_btn a{
