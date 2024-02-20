@@ -3,9 +3,11 @@ package com.example.security20.controller;
 import com.example.security20.dto.UserDTO;
 import com.example.security20.entity.User;
 import com.example.security20.entity.UserPhysicalParameters;
+import com.example.security20.entity.WorkoutPlan;
 import com.example.security20.repository.UserPhysicalParametersRepository;
 import com.example.security20.repository.UserRepository;
 import com.example.security20.service.UserService;
+import com.example.security20.service.WorkoutPlanService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +30,37 @@ public class UserController {
     private final UserService userService;
     @Autowired
     private UserPhysicalParametersRepository userPhysicalParametersRepository;
+    @Autowired
+    private WorkoutPlanService workoutPlanService;
     @GetMapping("/{userId}")
     public String userCreate(@PathVariable("userId") Long id, Model model){
         Optional<User> userOptional = userService.getUserById(id);
         User user = userOptional.get();
         List<UserPhysicalParameters> userPhysicalParametersList = userPhysicalParametersRepository.findPhysicalParametersByUserId(user.getId());
+        List<WorkoutPlan> workoutPlans = workoutPlanService.getWorkoutPlansByUserId(id);
+        model.addAttribute("workoutPlans", workoutPlans);
         model.addAttribute("user", user);
         model.addAttribute("userPhysicalParametersList", userPhysicalParametersList);
         return "userPage";
     }
     @GetMapping("/delete/{userId}")
-    public String userDelete(@PathVariable("userId") Long id, Model model){
+    public String userDelete(@PathVariable("userId") Long id){
+        userService.deleteUserPhysicalParameters(id);
         userService.deleteUser(id);
         return "redirect:/api/v1/home";
     }
-
+    @GetMapping("/create")
+    public String userCreate(Model model){
+        model.addAttribute("user",new UserDTO());
+        return "signup";
+    }
+    @PostMapping("/create")
+    public String userSave(@ModelAttribute("user") User user, Model model){
+        userService.createUser(user);
+        List<User> usersList = userService.findAllUsers();
+        model.addAttribute("usersList", usersList);
+        return "redirect:/api/v1/home";
+    }
 
 }
 

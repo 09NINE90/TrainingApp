@@ -47,8 +47,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteUserPhysicalParameters(Long id) {
+        physicalParametersRepository.deletePhysicalParametersByUserId(id);
+    }
+
+    @Override
     public void saveUserPhysicalParameters(UserPhysicalParameters userPhysicalParameters) {
         physicalParametersRepository.save(userPhysicalParameters);
     }
+
+
 
 }
