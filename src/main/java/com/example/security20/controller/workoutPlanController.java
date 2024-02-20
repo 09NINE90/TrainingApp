@@ -20,13 +20,13 @@ public class workoutPlanController {
     @Autowired
     WorkoutPlanService workoutPlanService;
     @GetMapping("/setWorkoutPlan/{userId}")
-    public String createPhysicalParameters(@PathVariable("userId") Long id, Model model){
+    public String createWorkoutPlan(@PathVariable("userId") Long id, Model model){
         model.addAttribute("userId", id);
         model.addAttribute("workoutPlan",new WorkoutPlan());
         return "workoutForm";
     }
     @PostMapping("/setWorkoutPlan/{userId}")
-    public String createPhysicalParameters(@PathVariable("userId") Long id, @ModelAttribute("workoutPlan") WorkoutPlan workoutPlan) {
+    public String createWorkoutPlan(@PathVariable("userId") Long id, @ModelAttribute("workoutPlan") WorkoutPlan workoutPlan) {
         workoutPlan.setUserId(id);
         workoutPlanService.saveWorkoutPlan(workoutPlan);
         return "redirect:/user/" + id;
@@ -41,4 +41,10 @@ public class workoutPlanController {
         return "workoutPlanPage";
     }
 
+    @GetMapping("/deleteWorkoutPlan/{workoutPlanId}/{userId}")
+    public String deleteWorkoutPlan(@PathVariable("userId") Long id, @PathVariable("workoutPlanId") Long workoutPlanId){
+        System.out.println(workoutPlanId);
+        workoutPlanService.deleteWorkoutPlanById(workoutPlanId);
+        return "redirect:/user/" + id;
+    }
 }

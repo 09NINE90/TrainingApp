@@ -21,4 +21,10 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
     public void saveWorkoutPlan(WorkoutPlan plan) {
         workoutPlanRepository.save(plan);
     }
+
+    @Override
+    public void deleteWorkoutPlanById(Long id) {
+        workoutPlanRepository.deleteById(id);
+    }
+
 }

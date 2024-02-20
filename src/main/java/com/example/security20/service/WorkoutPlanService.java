@@ -7,4 +7,6 @@ import java.util.List;
 public interface WorkoutPlanService {
     List<WorkoutPlan> getWorkoutPlansByUserId(Long userId);
     void saveWorkoutPlan(WorkoutPlan plan);
+
+    void deleteWorkoutPlanById(Long id);
 }

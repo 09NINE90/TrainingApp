@@ -1,11 +1,13 @@
 package com.example.security20.controller;
 
 import com.example.security20.dto.UserDTO;
+import com.example.security20.entity.Nutrition;
 import com.example.security20.entity.User;
 import com.example.security20.entity.UserPhysicalParameters;
 import com.example.security20.entity.WorkoutPlan;
 import com.example.security20.repository.UserPhysicalParametersRepository;
 import com.example.security20.repository.UserRepository;
+import com.example.security20.service.NutritionService;
 import com.example.security20.service.UserService;
 import com.example.security20.service.WorkoutPlanService;
 import lombok.AllArgsConstructor;
@@ -32,12 +34,16 @@ public class UserController {
     private UserPhysicalParametersRepository userPhysicalParametersRepository;
     @Autowired
     private WorkoutPlanService workoutPlanService;
+    @Autowired
+    private NutritionService nutritionService;
     @GetMapping("/{userId}")
     public String userCreate(@PathVariable("userId") Long id, Model model){
         Optional<User> userOptional = userService.getUserById(id);
         User user = userOptional.get();
         List<UserPhysicalParameters> userPhysicalParametersList = userPhysicalParametersRepository.findPhysicalParametersByUserId(user.getId());
         List<WorkoutPlan> workoutPlans = workoutPlanService.getWorkoutPlansByUserId(id);
+        List<Nutrition> nutritionList = nutritionService.getNutritionByUserId(id);
+        model.addAttribute("nutritionList", nutritionList);
         model.addAttribute("workoutPlans", workoutPlans);
         model.addAttribute("user", user);
         model.addAttribute("userPhysicalParametersList", userPhysicalParametersList);
