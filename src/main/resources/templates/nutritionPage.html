@@ -17,13 +17,13 @@
             <li><a href='/api/v1/home' data-item='главная'>главная</a></li>
             <li><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></li>
             <li><a href='/api/v1/getNutritionPage' data-item='питание'>питание</a></li>
-            <li><a href='#' data-item='контакты'>контакты</a></li>
+            <li><a href='/api/v1/getReports' data-item='отчеты'>отчеты</a></li>
             <li><a href='/user/logout' data-item='выйти'>выйти</a></li>
         </ul>
     </nav>
 </div>
 <div class="profile">
-
+    <h2>Питание</h2>
     <form class="form" th:action="@{/api/v1/addNutrition}"  th:object="${nutrition}" method="post">
 
         <div class="inputBox">

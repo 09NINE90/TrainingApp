@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренрировки</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+</head>
+<body>
+<div class="nav">
+    <nav>
+        <ul class="menuItems">
+            <li><a href='/api/v1/home' data-item='главная'>главная</a></li>
+            <li><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></li>
+            <li><a href='/api/v1/getNutritionPage' data-item='питание'>питание</a></li>
+            <li><a href='/api/v1/getReports' data-item='отчеты'>отчеты</a></li>
+            <li><a href='/user/logout' data-item='выйти'>выйти</a></li>
+
+        </ul>
+    </nav>
+</div>
+<div class="profile">
+    <h2>Отчеты о тренировках</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Дата тренировки</th>
+            <th>Упражнение</th>
+            <th>Повторения</th>
+            <th>Отчет</th>
+            <!-- Добавьте другие колонки по необходимости -->
+        </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="reportOfWorkout : ${reportOfWorkoutList}">
+                <tr>
+                    <td th:text="${reportOfWorkout.date}" rowspan="6"></td>
+                    <td th:text="${reportOfWorkout.exercises1}"></td>
+                    <td th:text="${reportOfWorkout.repetitions1Plan}"></td>
+                    <td th:text="${reportOfWorkout.repetitions1}"></td>
+                </tr>
+                <tr>
+                    <td th:text="${reportOfWorkout.exercises2}"></td>
+                    <td th:text="${reportOfWorkout.repetitions2Plan}"></td>
+                    <td th:text="${reportOfWorkout.repetitions2}"></td>
+                </tr>
+                <tr>
+                    <td th:text="${reportOfWorkout.exercises3}"></td>
+                    <td th:text="${reportOfWorkout.repetitions3Plan}"></td>
+                    <td th:text="${reportOfWorkout.repetitions3}"></td>
+                </tr>
+                <tr>
+                    <td th:text="${reportOfWorkout.exercises4}"></td>
+                    <td th:text="${reportOfWorkout.repetitions4Plan}"></td>
+                    <td th:text="${reportOfWorkout.repetitions4}"></td>
+                </tr>
+                <tr>
+
+                    <td th:text="${reportOfWorkout.exercises5}"></td>
+                    <td th:text="${reportOfWorkout.repetitions5Plan}"></td>
+                    <td th:text="${reportOfWorkout.repetitions5}"></td>
+                </tr>
+                <tr>
+                    <td th:text="${reportOfWorkout.exercises6}"></td>
+                    <td th:text="${reportOfWorkout.repetitions6Plan}"></td>
+                    <td th:text="${reportOfWorkout.repetitions6}"></td>
+                </tr>
+
+            </th:block>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+
