@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/logintest.css}">
+</head>
+<body>
+<section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+
+    <div class="signin report">
+
+        <div class="content">
+
+            <h2>Отчет о тренировке</h2>
+            <form class="form" th:action="@{'/api/v1/addReport/' + ${workoutPlanId}}"  th:object="${reportOfWorkoutPlan}" method="post">
+
+                <div class="inputBox">
+                    <input type="text" th:field="*{repetitions1}"  name="repetitions1" required><i th:text="${exercises1} + ' Повторения (Вес)'"></i>
+                </div>
+                <div class="inputBox">
+                    <input type="text" th:field="*{repetitions2}" name="repetitions2" required><i th:text="${exercises2} + ' Повторения (Вес)'"></i>
+                </div>
+                <div class="inputBox">
+                    <input type="text" th:field="*{repetitions3}" name="repetitions3" required><i th:text="${exercises3} + ' Повторения (Вес)'"></i>
+                </div>
+                <div class="inputBox">
+                    <input type="text" th:field="*{repetitions4}" name="repetitions4" required><i th:text="${exercises4} + ' Повторения (Вес)'"></i>
+                </div>
+                <div class="inputBox">
+                    <input type="text" th:field="*{repetitions5}" name="repetitions5" required><i th:text="${exercises5} + ' Повторения (Вес)'"></i>
+                </div>
+                <div class="inputBox">
+                    <input type="text" th:field="*{repetitions6}" name="repetitions6" required><i th:text="${exercises6} + ' Повторения (Вес)'"></i>
+                </div>
+                <div class="inputBox">
+                    <input type="date" th:field="*{date}" name="date" required><i>Дата</i>
+                </div>
+                <div class="inputBox">
+
+                    <input type="submit" value="отправить">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

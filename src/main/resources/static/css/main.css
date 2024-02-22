@@ -50,7 +50,12 @@ a{
     color: #ffffff;
     opacity: 1;
 }
-
+.profile h2{
+    font-size: 2em;
+    color: #ce0000;
+    text-transform: uppercase;
+    text-align: center;
+}
 
 .profile .add_btn{
     margin-top: 20px;

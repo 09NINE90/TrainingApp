@@ -46,6 +46,9 @@
     <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
         <a th:href="@{'/api/v1/setWorkoutPlan/' + ${user.id}}" data-item='Добавить план тренировок'>Добавить план тренировок</a>
     </div>
+    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+        <a th:href="@{'/api/v1/getReportsForAdmin/' + ${user.id}}" data-item='Посмотреть отчеты тренировок'>Посмотреть отчеты тренировок</a>
+    </div>
     <table th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
         <thead>
         <tr>
