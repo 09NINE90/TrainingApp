@@ -36,6 +36,11 @@ public class UserController {
     private WorkoutPlanService workoutPlanService;
     @Autowired
     private NutritionService nutritionService;
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "login";
+    }
     @GetMapping("/{userId}")
     public String userCreate(@PathVariable("userId") Long id, Model model){
         Optional<User> userOptional = userService.getUserById(id);

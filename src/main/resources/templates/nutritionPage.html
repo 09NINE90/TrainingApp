@@ -18,43 +18,41 @@
             <li><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></li>
             <li><a href='/api/v1/getNutritionPage' data-item='питание'>питание</a></li>
             <li><a href='#' data-item='контакты'>контакты</a></li>
-            <li><a href='/logout' data-item='выйти'>выйти</a></li>
-
+            <li><a href='/user/logout' data-item='выйти'>выйти</a></li>
         </ul>
     </nav>
 </div>
 <div class="profile">
-    <div class="form-container">
-        <form class="form" th:action="@{/api/v1/addNutrition}"  th:object="${nutrition}" method="post">
 
-            <div class="inputBox">
-                <input type="text" th:field="*{food}"  name="food" required><i>Название продукта</i>
-            </div>
-            <div class="inputBox">
-                <input type="number" step="0.01" th:field="*{weight}" name="weight" required><i>Вес (г)</i>
-            </div>
-            <div class="inputBox">
-                <input type="number" step="0.01" th:field="*{calories}" name="calories" required><i>Калорийность (на 100 г продукта)</i>
-            </div>
-            <div class="inputBox">
-                <input type="number" step="0.01" th:field="*{proteins}" name="proteins" required><i>Белки (г/100 г продукта)</i>
-            </div>
-            <div class="inputBox">
-                <input type="number" step="0.01" th:field="*{fats}" name="fats" required><i>Жиры (г/100 г продукта)</i>
-            </div>
-            <div class="inputBox">
-                <input type="number" step="0.01" th:field="*{carbohydrates}" name="carbohydrates" required><i>Углеводы (г/100 г продукта)</i>
-            </div>
-            <div class="inputBox">
-                <input type="datetime-local" th:field="*{date}" name="date" required><i>Дата и время приема пищи</i>
-            </div>
-            <div class="inputBox">
+    <form class="form" th:action="@{/api/v1/addNutrition}"  th:object="${nutrition}" method="post">
 
-                <input type="submit" value="добавить">
+        <div class="inputBox">
+            <input type="text" th:field="*{food}"  name="food" placeholder="Название продукта" required>
+        </div>
+        <div class="inputBox">
+            <input type="number" step="0.01" th:field="*{weight}" name="weight" placeholder="Вес (г)" required>
+        </div>
+        <div class="inputBox">
+            <input type="number" step="0.01" th:field="*{calories}" name="calories" placeholder="Калорийность (на 100 г продукта)" required>
+        </div>
+        <div class="inputBox">
+            <input type="number" step="0.01" th:field="*{proteins}" name="proteins" placeholder="Белки (г/100 г продукта)" required>
+        </div>
+        <div class="inputBox">
+            <input type="number" step="0.01" th:field="*{fats}" name="fats" placeholder="Жиры (г/100 г продукта)" required>
+        </div>
+        <div class="inputBox">
+            <input type="number" step="0.01" th:field="*{carbohydrates}" name="carbohydrates" placeholder="Углеводы (г/100 г продукта)" required>
+        </div>
+        <div class="inputBox">
+            <input type="datetime-local" th:field="*{date}" name="date" required>
+        </div>
+        <div class="inputBox">
 
-            </div>
-        </form>
-    </div>
+            <input type="submit" value="добавить">
+
+        </div>
+    </form>
 
     <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
         <thead>
@@ -86,8 +84,6 @@
     </table>
 </div>
 
-<section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
-</section>
 </body>
 </html>
 
