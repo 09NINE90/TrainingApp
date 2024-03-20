@@ -8,6 +8,6 @@ build:
   artifacts:
     build/libs/*.jar: /
 run:
-  jarName: main.jar
+  jarName: security2-0-0.0.1-SNAPSHOT.jar
   persistenceMount: /data
   containerPort: 80
