@@ -22,7 +22,7 @@ public class User {
     private String userName;
     private String phoneNumber;
     private String password;
-    private String roles = "ROLE_USER";
+    private String roles;
 
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<UserPhysicalParameters> userPhysicalParameters = new ArrayList<UserPhysicalParameters>();

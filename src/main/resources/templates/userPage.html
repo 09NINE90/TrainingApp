@@ -12,12 +12,15 @@
 </head>
 <body>
 <div class="profile">
+    <h2 th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">страница пользователя <span th:text="${user.firstName}"></span></h2>
+    <h2 th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">тренер <span th:text="${user.firstName}"></span></h2>
     <div class="contact">
         <p>Имя: <span th:text="${user.firstName}"></span></p>
         <p>Фамилия: <span th:text="${user.lastName}"></span></p>
         <p>Email: <span th:text="${user.userName}"></span></p>
+        <p>телефон: <span th:text="${user.phoneNumber}"></span></p>
     </div>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+    <table th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
         <thead>
         <tr>
             <th>Возраст</th>
@@ -43,13 +46,13 @@
         </tr>
         </tbody>
     </table>
-    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
         <a th:href="@{'/api/v1/setWorkoutPlan/' + ${user.id}}" data-item='Добавить план тренировок'>Добавить план тренировок</a>
     </div>
-    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
         <a th:href="@{'/api/v1/getReportsForAdmin/' + ${user.id}}" data-item='Посмотреть отчеты тренировок'>Посмотреть отчеты тренировок</a>
     </div>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+    <table th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
         <thead>
         <tr>
             <th>Удаление тренировки</th>
@@ -98,7 +101,7 @@
         </tbody>
     </table>
 
-    <table th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+    <table th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
         <thead>
         <tr>
             <th>Название продукта</th>

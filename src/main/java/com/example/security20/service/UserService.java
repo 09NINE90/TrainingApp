@@ -8,12 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    public UserDTO createUser(User user);
+    UserDTO createUser(User user);
 
-    public List<User> findAllUsers() ;
+    List<User> findAllUsers() ;
     void saveUserPhysicalParameters(UserPhysicalParameters userPhysicalParameters);
-    public Optional<User> getUserById(Long id);
+    Optional<User> getUserById(Long id);
     void deleteUser(Long id);
 
     void deleteUserPhysicalParameters(Long id);
+
+    List<User> getUserByRole(String role);
+
 }

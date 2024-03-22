@@ -52,6 +52,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getUserByRole(String role) {
+        return userRepository.findUserByRoles(role);
+    }
+
+    @Override
     public void saveUserPhysicalParameters(UserPhysicalParameters userPhysicalParameters) {
         physicalParametersRepository.save(userPhysicalParameters);
     }

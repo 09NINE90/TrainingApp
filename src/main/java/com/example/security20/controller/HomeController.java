@@ -34,6 +34,7 @@ public class HomeController {
 
     @GetMapping("/home")
     public String getUserProfile(Authentication authentication, Model model) {
+        String role = "";
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         Long userId = userDetails.getId();
         List<UserPhysicalParameters> userPhysicalParametersList = userPhysicalParametersRepository.findPhysicalParametersByUserId(userId);
@@ -42,7 +43,12 @@ public class HomeController {
         model.addAttribute("username", userDetails.getUsername());
         model.addAttribute("firstName", userDetails.getFirstName());
         model.addAttribute("lastName", userDetails.getLastName());
-        List<User> usersList = userService.findAllUsers();
+        if (userDetails.getRole().equals("ROLE_COACH")){
+            role = "ROLE_USER";
+        }else if (userDetails.getRole().equals("ROLE_ADMIN")){
+            role = "ROLE_COACH";
+        }
+        List<User> usersList = userService.getUserByRole(role);
         model.addAttribute("usersList", usersList);
 
         return "mainPage";
