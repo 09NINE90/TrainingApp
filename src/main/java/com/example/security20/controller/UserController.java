@@ -1,5 +1,7 @@
 package com.example.security20.controller;
 
+import ch.qos.logback.core.util.DelayStrategy;
+import com.example.security20.dto.CustomUserDetails;
 import com.example.security20.dto.UserDTO;
 import com.example.security20.entity.Nutrition;
 import com.example.security20.entity.User;
@@ -66,10 +68,14 @@ public class UserController {
         return "signup";
     }
     @PostMapping("/create")
-    public String userSave(@ModelAttribute("user") User user, Model model){
+    public String userSave(Authentication authentication, @ModelAttribute("user") User user, Model model){
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        if (userDetails.getRole().equals("ROLE_COACH")){
+            user.setRoles("ROLE_USER");
+        }else if (userDetails.getRole().equals("ROLE_ADMIN")){
+            user.setRoles("ROLE_COACH");
+        }
         userService.createUser(user);
-        List<User> usersList = userService.findAllUsers();
-        model.addAttribute("usersList", usersList);
         return "redirect:/api/v1/home";
     }
 

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренрировки</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+</head>
+<body>
+<div class="nav">
+    <nav>
+        <ul class="menuItems">
+            <li><a href='/api/v1/home' data-item='главная'>главная</a></li>
+            <li><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></li>
+            <li><a href='/api/v1/getNutritionPage' data-item='питание'>питание</a></li>
+            <li><a href='/api/v1/getReports' data-item='отчеты'>отчеты</a></li>
+            <li><a href='/api/v1/getActivity' data-item='активность'>активность</a></li>
+            <li><a href='/user/logout' data-item='выйти'>выйти</a></li>
+
+        </ul>
+    </nav>
+</div>
+<div class="profile">
+    <h2>активность</h2>
+    <form class="form" th:action="@{/api/v1/addActivity}"  th:object="${activity}" method="post">
+
+        <div class="inputBox">
+            <input type="text" th:field="*{nameActivity}"  name="nameActivity" placeholder="Название активности" required>
+        </div>
+        <div class="inputBox">
+            <input type="text" step="0.01" th:field="*{activityLoad}" name="activityLoad" placeholder="Нагрузка(время/растояние/количество шагов)" required>
+        </div>
+        <div class="inputBox">
+            <input type="date" th:field="*{date}" name="date" required>
+        </div>
+        <div class="inputBox">
+            <input type="submit" value="добавить">
+        </div>
+    </form>
+    <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <thead>
+        <tr>
+            <th>Название активности</th>
+            <th>Время/Растояние/Шаги</th>
+            <th>Дата</th>
+            <th>Удаление активности</th>
+            <!-- Добавьте другие колонки по необходимости -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="activity : ${activityList}">
+            <td th:text="${activity.nameActivity}"></td>
+            <td th:text="${activity.activityLoad}"></td>
+            <td th:text="${activity.date}"></td>
+            <td><a th:href="@{'/api/v1/deleteActivity/' + ${activity.id}}">Удалить</a></td>
+            <!-- Добавьте другие ячейки по необходимости -->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+

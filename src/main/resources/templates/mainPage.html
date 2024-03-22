@@ -12,19 +12,20 @@
 </head>
 <body>
 <div class="nav">
-    <nav>
+    <nav th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
         <ul class="menuItems">
             <li><a href='/api/v1/home' data-item='главная'>главная</a></li>
             <li><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></li>
             <li><a href='/api/v1/getNutritionPage' data-item='питание'>питание</a></li>
             <li><a href='/api/v1/getReports' data-item='отчеты'>отчеты</a></li>
+            <li><a href='/api/v1/getActivity' data-item='активность'>активность</a></li>
             <li><a href='/user/logout' data-item='выйти'>выйти</a></li>
 
         </ul>
     </nav>
 </div>
 <div class="profile">
-    <h2>Главная</h2>
+    <h2>Главная <a href='/user/logout' data-item='выйти' th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_COACH'')')}">выйти</a></h2>
     <div class="contact">
         <!--    <p>User ID: <span th:text="${userId}"></span></p>-->
         <p>Email: <span th:text="${username}"></span></p>
@@ -62,10 +63,10 @@
         </tbody>
     </table>
 
-    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_COACH'')')}">
         <a href='/api/v1/create' data-item='Добавить пользователя'>Добавить пользователя</a>
     </div>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+    <table th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_COACH'')')}">
         <thead>
         <tr>
             <th>Имя</th>

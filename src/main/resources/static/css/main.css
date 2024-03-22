@@ -182,6 +182,7 @@ td {
     font-size: 1.35em;
     letter-spacing: 0.05em;
     cursor: pointer;
+    width: 105%;
 }
 input[type="submit"]:hover{
     opacity: 0.6;
