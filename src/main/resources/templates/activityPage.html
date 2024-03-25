@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="nav">
-    <nav>
+    <nav th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
         <ul class="menuItems">
             <li><a href='/api/v1/home' data-item='главная'>главная</a></li>
             <li><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></li>
@@ -20,13 +20,21 @@
             <li><a href='/api/v1/getReports' data-item='отчеты'>отчеты</a></li>
             <li><a href='/api/v1/getActivity' data-item='активность'>активность</a></li>
             <li><a href='/user/logout' data-item='выйти'>выйти</a></li>
-
+        </ul>
+    </nav>
+    <nav th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
+        <ul class="menuItems">
+            <li><a href="/api/v1/home"  data-item='главная'>главная</a></li>
+            <li><a th:href="@{'/user/' + ${userId}}" data-item='страница пользователя'>страница пользователя</a></li>
+            <li><a th:href="@{'/api/v1/getWorkoutPage/' + ${userId}}" data-item='тренировки'>тренировки</a></li>
+            <li><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></li>
+            <li><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></li>
         </ul>
     </nav>
 </div>
 <div class="profile">
     <h2>активность</h2>
-    <form class="form" th:action="@{/api/v1/addActivity}"  th:object="${activity}" method="post">
+    <form class="form" th:action="@{/api/v1/addActivity}"  th:object="${activity}" method="post" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
 
         <div class="inputBox">
             <input type="text" th:field="*{nameActivity}"  name="nameActivity" placeholder="Название активности" required>
@@ -41,13 +49,13 @@
             <input type="submit" value="добавить">
         </div>
     </form>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+    <table>
         <thead>
         <tr>
             <th>Название активности</th>
             <th>Время/Растояние/Шаги</th>
             <th>Дата</th>
-            <th>Удаление активности</th>
+            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Удаление активности</th>
             <!-- Добавьте другие колонки по необходимости -->
         </tr>
         </thead>
@@ -56,7 +64,7 @@
             <td th:text="${activity.nameActivity}"></td>
             <td th:text="${activity.activityLoad}"></td>
             <td th:text="${activity.date}"></td>
-            <td><a th:href="@{'/api/v1/deleteActivity/' + ${activity.id}}">Удалить</a></td>
+            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteActivity/' + ${activity.id}}">Удалить</a></td>
             <!-- Добавьте другие ячейки по необходимости -->
         </tr>
         </tbody>

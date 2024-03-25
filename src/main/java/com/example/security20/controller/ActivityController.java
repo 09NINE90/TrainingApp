@@ -25,6 +25,13 @@ public class ActivityController {
         model.addAttribute("activityList",activityList);
         return "activityPage";
     }
+    @GetMapping("/getActivity/{userId}")
+    public String getActivity(Model model, @PathVariable("userId") Long id, @ModelAttribute("activity") Activity activity){
+        model.addAttribute("userId", id);
+        List<Activity> activityList = activityService.getActivityByUserId(id);
+        model.addAttribute("activityList",activityList);
+        return "activityPage";
+    }
 
     @GetMapping("/addActivity")
     public void addActivity(Model model){

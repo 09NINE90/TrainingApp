@@ -25,13 +25,6 @@ public class workoutPlanController {
         model.addAttribute("workoutPlan",new WorkoutPlan());
         return "workoutForm";
     }
-    @PostMapping("/setWorkoutPlan/{userId}")
-    public String createWorkoutPlan(@PathVariable("userId") Long id, @ModelAttribute("workoutPlan") WorkoutPlan workoutPlan) {
-        workoutPlan.setUserId(id);
-        workoutPlanService.saveWorkoutPlan(workoutPlan);
-        return "redirect:/user/" + id;
-    }
-
     @GetMapping("/getWorkoutPage")
     public String getWorkoutPage(Authentication authentication, Model model){
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
@@ -41,10 +34,23 @@ public class workoutPlanController {
         return "workoutPlanPage";
     }
 
+    @GetMapping("/getWorkoutPage/{userId}")
+    public String getWorkoutPageByUserId(Model model, @PathVariable("userId") Long id){
+        model.addAttribute("userId", id);
+        List<WorkoutPlan> workoutPlans = workoutPlanService.getWorkoutPlansByUserId(id);
+        model.addAttribute("workoutPlans", workoutPlans);
+        return "workoutPlanPage";
+    }
+    @PostMapping("/setWorkoutPlan/{userId}")
+    public String createWorkoutPlan(@PathVariable("userId") Long id, @ModelAttribute("workoutPlan") WorkoutPlan workoutPlan) {
+        workoutPlan.setUserId(id);
+        workoutPlanService.saveWorkoutPlan(workoutPlan);
+        return "redirect:/api/v1/getWorkoutPage/" + id;
+    }
     @GetMapping("/deleteWorkoutPlan/{workoutPlanId}/{userId}")
     public String deleteWorkoutPlan(@PathVariable("userId") Long id, @PathVariable("workoutPlanId") Long workoutPlanId){
         workoutPlanService.deleteWorkoutPlanById(workoutPlanId);
-        return "redirect:/user/" + id;
+        return "redirect:/api/v1/getWorkoutPage/" + id;
     }
 
     @GetMapping("/createReport/{workoutPlanId}")

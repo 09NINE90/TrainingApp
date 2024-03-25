@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="nav">
-    <nav>
+    <nav th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
         <ul class="menuItems">
             <li><a href='/api/v1/home' data-item='главная'>главная</a></li>
             <li><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></li>
@@ -23,13 +23,29 @@
 
         </ul>
     </nav>
+    <nav th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
+        <ul class="menuItems">
+            <li><a href="/api/v1/home"  data-item='главная'>главная</a></li>
+            <li><a th:href="@{'/user/' + ${userId}}" data-item='страница пользователя'>страница пользователя</a></li>
+            <li><a th:href="@{'/api/v1/getWorkoutPage/' + ${userId}}" data-item='тренировки'>тренировки</a></li>
+            <li><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></li>
+            <li><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></li>
+        </ul>
+    </nav>
 </div>
 <div class="profile">
     <h2>План тренировок</h2>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
+        <a th:href="@{'/api/v1/setWorkoutPlan/' + ${userId}}" data-item='Добавить план тренировок'>Добавить план тренировок</a>
+    </div>
+    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
+        <a th:href="@{'/api/v1/getReportsForAdmin/' + ${userId}}" data-item='Посмотреть отчеты тренировок'>Посмотреть отчеты тренировок</a>
+    </div>
+    <table>
         <thead>
         <tr>
-            <th>Отчет</th>
+            <th th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">Удаление тренировки</th>
+            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Отчет</th>
             <th>Название тренировки</th>
             <th>Упражнение</th>
             <th>Повторения</th>
@@ -40,7 +56,8 @@
         <tbody>
         <th:block th:each="workoutPlan : ${workoutPlans}">
             <tr>
-                <td rowspan="6"><a th:href="@{'/api/v1/createReport/' + ${workoutPlan.id}}">Сделать отчет</a></td>
+                <td rowspan="6" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}"><a th:href="@{'/api/v1/deleteWorkoutPlan/' + ${workoutPlan.id} + '/' + ${userId}}">Удалить</a></td>
+                <td rowspan="6" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/createReport/' + ${workoutPlan.id}}">Сделать отчет</a></td>
                 <td th:text="${workoutPlan.dayOfWeek}" rowspan="6"></td>
                 <td th:text="${workoutPlan.exercises1}"></td>
                 <td th:text="${workoutPlan.repetitions1}"></td>
