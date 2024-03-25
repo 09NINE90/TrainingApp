@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="nav">
-    <nav>
+    <nav th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
         <ul class="menuItems">
             <li><a href='/api/v1/home' data-item='главная'>главная</a></li>
             <li><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></li>
@@ -22,10 +22,19 @@
             <li><a href='/user/logout' data-item='выйти'>выйти</a></li>
         </ul>
     </nav>
+    <nav th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
+        <ul class="menuItems">
+            <li><a href="/api/v1/home"  data-item='главная'>главная</a></li>
+            <li><a th:href="@{'/user/' + ${userId}}" data-item='страница пользователя'>страница пользователя</a></li>
+            <li><a th:href="@{'/api/v1/getWorkoutPage/' + ${userId}}" data-item='тренировки'>тренировки</a></li>
+            <li><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></li>
+            <li><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></li>
+        </ul>
+    </nav>
 </div>
 <div class="profile">
     <h2>Питание</h2>
-    <form class="form" th:action="@{/api/v1/addNutrition}"  th:object="${nutrition}" method="post">
+    <form class="form" th:action="@{/api/v1/addNutrition}"  th:object="${nutrition}" method="post" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
 
         <div class="inputBox">
             <input type="text" th:field="*{food}"  name="food" placeholder="Название продукта" required>
@@ -55,7 +64,7 @@
         </div>
     </form>
 
-    <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+    <table>
         <thead>
         <tr>
             <th>Название продукта</th>
@@ -65,7 +74,7 @@
             <th>Жиры (г)</th>
             <th>Углеводы (г)</th>
             <th>Дата и время приема пищи</th>
-            <th>Удаление приема пищи</th>
+            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Удаление приема пищи</th>
             <!-- Добавьте другие колонки по необходимости -->
         </tr>
         </thead>
@@ -78,7 +87,7 @@
             <td th:text="${nutrition.fats}"></td>
             <td th:text="${nutrition.carbohydrates}"></td>
             <td th:text="${nutrition.date}"></td>
-            <td><a th:href="@{'/api/v1/deleteNutrition/' + ${nutrition.id}}">Удалить</a></td>
+            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteNutrition/' + ${nutrition.id}}">Удалить</a></td>
             <!-- Добавьте другие ячейки по необходимости -->
         </tr>
         </tbody>

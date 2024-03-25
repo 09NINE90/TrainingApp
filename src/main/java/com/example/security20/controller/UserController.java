@@ -48,10 +48,10 @@ public class UserController {
         Optional<User> userOptional = userService.getUserById(id);
         User user = userOptional.get();
         List<UserPhysicalParameters> userPhysicalParametersList = userPhysicalParametersRepository.findPhysicalParametersByUserId(user.getId());
-        List<WorkoutPlan> workoutPlans = workoutPlanService.getWorkoutPlansByUserId(id);
-        List<Nutrition> nutritionList = nutritionService.getNutritionByUserId(id);
-        model.addAttribute("nutritionList", nutritionList);
-        model.addAttribute("workoutPlans", workoutPlans);
+//        List<WorkoutPlan> workoutPlans = workoutPlanService.getWorkoutPlansByUserId(id);
+//        List<Nutrition> nutritionList = nutritionService.getNutritionByUserId(id);
+//        model.addAttribute("nutritionList", nutritionList);
+//        model.addAttribute("workoutPlans", workoutPlans);
         model.addAttribute("user", user);
         model.addAttribute("userPhysicalParametersList", userPhysicalParametersList);
         return "userPage";

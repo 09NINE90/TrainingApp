@@ -11,6 +11,16 @@
     />
 </head>
 <body>
+<div class="nav">
+    <nav>
+        <ul class="menuItems">
+            <li><a href="/api/v1/home"  data-item='главная'>главная</a></li>
+            <li><a th:href="@{'/api/v1/getWorkoutPage/' + ${user.id}}" data-item='тренировки'>тренировки</a></li>
+            <li><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></li>
+            <li><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></li>
+        </ul>
+    </nav>
+</div>
 <div class="profile">
     <h2 th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">страница пользователя <span th:text="${user.firstName}"></span></h2>
     <h2 th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">тренер <span th:text="${user.firstName}"></span></h2>
@@ -18,7 +28,7 @@
         <p>Имя: <span th:text="${user.firstName}"></span></p>
         <p>Фамилия: <span th:text="${user.lastName}"></span></p>
         <p>Email: <span th:text="${user.userName}"></span></p>
-        <p>телефон: <span th:text="${user.phoneNumber}"></span></p>
+        <p>Телефон: <span th:text="${user.phoneNumber}"></span></p>
     </div>
     <table th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
         <thead>
@@ -42,87 +52,6 @@
             <td th:text="${physicalParameters.hipCircumference}"></td>
             <td th:text="${physicalParameters.waistCircumference}"></td>
             <td th:text="${physicalParameters.date}"></td>
-            <!-- Добавьте другие ячейки по необходимости -->
-        </tr>
-        </tbody>
-    </table>
-    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
-        <a th:href="@{'/api/v1/setWorkoutPlan/' + ${user.id}}" data-item='Добавить план тренировок'>Добавить план тренировок</a>
-    </div>
-    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
-        <a th:href="@{'/api/v1/getReportsForAdmin/' + ${user.id}}" data-item='Посмотреть отчеты тренировок'>Посмотреть отчеты тренировок</a>
-    </div>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
-        <thead>
-        <tr>
-            <th>Удаление тренировки</th>
-            <th>Название тренировки</th>
-            <th>Упражнение</th>
-            <th>Повторения</th>
-
-            <!-- Добавьте другие колонки по необходимости -->
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="workoutPlan : ${workoutPlans}">
-            <tr>
-                <td rowspan="6"><a th:href="@{'/api/v1/deleteWorkoutPlan/' + ${workoutPlan.id} + '/' + ${user.id}}">Удалить</a></td>
-                <td th:text="${workoutPlan.dayOfWeek}" rowspan="6"></td>
-                <td th:text="${workoutPlan.exercises1}"></td>
-                <td th:text="${workoutPlan.repetitions1}"></td>
-            </tr>
-            <tr>
-
-                <td th:text="${workoutPlan.exercises2}"></td>
-                <td th:text="${workoutPlan.repetitions2}"></td>
-            </tr>
-            <tr>
-
-                <td th:text="${workoutPlan.exercises3}"></td>
-                <td th:text="${workoutPlan.repetitions3}"></td>
-            </tr>
-            <tr>
-
-                <td th:text="${workoutPlan.exercises4}"></td>
-                <td th:text="${workoutPlan.repetitions4}"></td>
-            </tr>
-            <tr>
-
-                <td th:text="${workoutPlan.exercises5}"></td>
-                <td th:text="${workoutPlan.repetitions5}"></td>
-            </tr>
-            <tr>
-
-                <td th:text="${workoutPlan.exercises6}"></td>
-                <td th:text="${workoutPlan.repetitions6}"></td>
-            </tr>
-
-        </th:block>
-        </tbody>
-    </table>
-
-    <table th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
-        <thead>
-        <tr>
-            <th>Название продукта</th>
-            <th>Вес (г)</th>
-            <th>Калорийность</th>
-            <th>Белки (г)</th>
-            <th>Жиры (г)</th>
-            <th>Углеводы (г)</th>
-            <th>Дата и время приема пищи</th>
-            <!-- Добавьте другие колонки по необходимости -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="nutrition : ${nutritionList}">
-            <td th:text="${nutrition.food}"></td>
-            <td th:text="${nutrition.weight}"></td>
-            <td th:text="${nutrition.calories}"></td>
-            <td th:text="${nutrition.proteins}"></td>
-            <td th:text="${nutrition.fats}"></td>
-            <td th:text="${nutrition.carbohydrates}"></td>
-            <td th:text="${nutrition.date}"></td>
             <!-- Добавьте другие ячейки по необходимости -->
         </tr>
         </tbody>

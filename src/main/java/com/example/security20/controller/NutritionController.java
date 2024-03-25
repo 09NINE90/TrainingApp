@@ -30,6 +30,14 @@ public class NutritionController {
         model.addAttribute("nutritionList", nutritionList);
         return "nutritionPage";
     }
+
+    @GetMapping("/getNutritionPage/{userId}")
+    public String getWorkoutPage(Model model, @PathVariable("userId") Long id, @ModelAttribute("nutrition") Nutrition nutrition){
+        model.addAttribute("userId", id);
+        List<Nutrition> nutritionList = nutritionService.getNutritionByUserId(id);
+        model.addAttribute("nutritionList", nutritionList);
+        return "nutritionPage";
+    }
     @GetMapping("/addNutrition")
     public void addNutrition(Model model){
         model.addAttribute("nutrition",new Nutrition());
