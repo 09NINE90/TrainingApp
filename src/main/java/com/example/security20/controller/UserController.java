@@ -75,6 +75,7 @@ public class UserController {
         }else if (userDetails.getRole().equals("ROLE_ADMIN")){
             user.setRoles("ROLE_COACH");
         }
+//        user.setRoles("ROLE_ADMIN");
         userService.createUser(user);
         return "redirect:/api/v1/home";
     }
