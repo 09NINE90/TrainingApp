@@ -74,12 +74,14 @@ public class UserController {
 
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         if (userDetails.getRole().equals("ROLE_COACH")){
+            user.setTrainerId(userDetails.getId());
             user.setRoles("ROLE_USER");
         }else if (userDetails.getRole().equals("ROLE_ADMIN")){
+            user.setTrainerId(userDetails.getId());
             user.setRoles("ROLE_COACH");
         }
 //        user.setRoles("ROLE_ADMIN");
-        mailService.sendMail(user, MailType.REGISTRATION, new Properties());
+//        mailService.sendMail(user, MailType.REGISTRATION, new Properties());
         userService.createUser(user);
         return "redirect:/api/v1/home";
     }

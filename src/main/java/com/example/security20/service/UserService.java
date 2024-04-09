@@ -17,6 +17,6 @@ public interface UserService {
 
     void deleteUserPhysicalParameters(Long id);
 
-    List<User> getUserByRole(String role);
+    List<User> getUserByRole(String role, Long id);
 
 }
