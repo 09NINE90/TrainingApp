@@ -44,9 +44,9 @@ public class HomeController {
         model.addAttribute("lastName", userDetails.getLastName());
         List<User> usersList = null;
         if (userDetails.getRole().equals("ROLE_COACH")){
-            usersList = userService.getUserByRole("ROLE_USER");
+            usersList = userService.getUserByRole("ROLE_USER", userId);
         }else if (userDetails.getRole().equals("ROLE_ADMIN")){
-            usersList = userService.getUserByRole("ROLE_COACH");
+            usersList = userService.getUserByRole("ROLE_COACH", userId);
         }
         model.addAttribute("usersList", usersList);
         return "mainPage";

@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     Optional<User> findById(Long id);
 
-    @Query(value = "SELECT * FROM security_user su WHERE roles = :role ORDER BY su.id DESC", nativeQuery = true)
-    List<User> findUserByRoles(@Param("role") String role);
+    @Query(value = "SELECT * FROM security_user su WHERE roles = :role AND trainer_id =:Tid ORDER BY su.id DESC", nativeQuery = true)
+    List<User> findUserByRoles(@Param("role") String role, @Param("Tid") Long Tid);
 
 }
