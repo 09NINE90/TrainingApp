@@ -9,17 +9,43 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <script th:src="@{/js/anime.min.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="nav">
-    <nav>
-        <ul class="menuItems">
-            <li><a href="/api/v1/home"  data-item='главная'>главная</a></li>
-            <li><a th:href="@{'/api/v1/getWorkoutPage/' + ${user.id}}" data-item='тренировки'>тренировки</a></li>
-            <li><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></li>
-            <li><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></li>
-        </ul>
-    </nav>
+<!--    <nav>-->
+<!--        <ul class="menuItems">-->
+<!--            <li><a href="/api/v1/home"  data-item='главная'>главная</a></li>-->
+<!--            <li><a th:href="@{'/api/v1/getWorkoutPage/' + ${user.id}}" data-item='тренировки'>тренировки</a></li>-->
+<!--            <li><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></li>-->
+<!--            <li><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+    <div class="container">
+        <div class="menu">
+            <div class="menu_item"><a href='/api/v1/home' data-item='главная'>главная</a></div>
+            <div class="menu_item"><a th:href="@{'/api/v1/getWorkoutPage/' + ${user.id}}" data-item='тренировки'>тренировки</a></div>
+            <div class="menu_item"><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></div>
+            <div class="menu_item"><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></div>
+
+        </div>
+
+        <div class="menu-small">
+            <div class="menu_small_item"><a href='/api/v1/home' data-item='главная'>главная</a></div>
+            <div class="menu_small_item"><a th:href="@{'/api/v1/getWorkoutPage/' + ${user.id}}" data-item='тренировки'>тренировки</a></div>
+            <div class="menu_small_item"><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></div>
+            <div class="menu_small_item"><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></div>
+
+
+        </div>
+        <div class="menu_small_icon">
+            <div class="stick"></div>
+            <div class="stick"></div>
+            <div class="stick"></div>
+        </div>
+
+    </div>
 </div>
 <div class="profile">
     <h2 th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">страница пользователя <span th:text="${user.firstName}"></span></h2>
@@ -57,7 +83,58 @@
         </tbody>
     </table>
 </div>
+<script>
+    let condition = true;
 
+    function forward() {
+        anime({
+            targets: '.menu-small',
+            translateX: ['-100%', '0'],
+            easing: 'easeInOutQuad',
+            direction: 'alternate',
+            duration: 500,
+            loop: false
+        });
+
+        condition = false
+    }
+
+    function backward() {
+        anime({
+            targets: '.menu-small',
+            translateX: ['0', '-100%'],
+            easing: 'easeInOutQuad',
+            direction: 'alternate',
+            duration: 500,
+            loop: false
+        });
+
+        condition = true
+    }
+
+    $('.menu_small_icon').click(function () {
+        if (condition) {
+            forward();
+        } else {
+            backward();
+        }
+    });
+
+    let start = 0;
+    let end = 0;
+    $('.container').on('touchstart', function (event) {
+        start = event.originalEvent.touches[0].pageX;
+    });
+    $('.container').on('touchend', function (event) {
+        end = event.originalEvent.changedTouches[0].pageX;
+        if (end - start >= 100 && condition) {
+            forward();
+        } else if (start - end >= 100 && !condition) {
+            backward();
+        }
+
+    });
+</script>
 
 </body>
 </html>

@@ -9,29 +9,79 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <script th:src="@{/js/anime.min.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="nav">
-    <nav th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
-        <ul class="menuItems">
-            <li><a href='/api/v1/home' data-item='главная'>главная</a></li>
-            <li><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></li>
-            <li><a href='/api/v1/getNutritionPage' data-item='питание'>питание</a></li>
-            <li><a href='/api/v1/getReports' data-item='отчеты'>отчеты</a></li>
-            <li><a href='/api/v1/getActivity' data-item='активность'>активность</a></li>
-            <li><a href='/user/logout' data-item='выйти'>выйти</a></li>
+<!--    <nav th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">-->
+<!--        <ul class="menuItems">-->
+<!--            <li><a href='/api/v1/home' data-item='главная'>главная</a></li>-->
+<!--            <li><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></li>-->
+<!--            <li><a href='/api/v1/getNutritionPage' data-item='питание'>питание</a></li>-->
+<!--            <li><a href='/api/v1/getReports' data-item='отчеты'>отчеты</a></li>-->
+<!--            <li><a href='/api/v1/getActivity' data-item='активность'>активность</a></li>-->
+<!--            <li><a href='/user/logout' data-item='выйти'>выйти</a></li>-->
 
-        </ul>
-    </nav>
-    <nav th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
-        <ul class="menuItems">
-            <li><a href="/api/v1/home"  data-item='главная'>главная</a></li>
-            <li><a th:href="@{'/user/' + ${userId}}" data-item='страница пользователя'>страница пользователя</a></li>
-            <li><a th:href="@{'/api/v1/getWorkoutPage/' + ${userId}}" data-item='тренировки'>тренировки</a></li>
-            <li><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></li>
-            <li><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></li>
-        </ul>
-    </nav>
+<!--        </ul>-->
+<!--    </nav>-->
+<!--    <nav th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">-->
+<!--        <ul class="menuItems">-->
+<!--            <li><a href="/api/v1/home"  data-item='главная'>главная</a></li>-->
+<!--            <li><a th:href="@{'/user/' + ${userId}}" data-item='страница пользователя'>страница пользователя</a></li>-->
+<!--            <li><a th:href="@{'/api/v1/getWorkoutPage/' + ${userId}}" data-item='тренировки'>тренировки</a></li>-->
+<!--            <li><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></li>-->
+<!--            <li><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+    <div class="container">
+        <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" class="menu">
+            <div class="menu_item"><a href='/api/v1/home' data-item='главная'>главная</a></div>
+            <div class="menu_item"><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></div>
+            <div class="menu_item"><a href='/api/v1/getNutritionPage' data-item='питание'>питание</a></div>
+            <div class="menu_item"><a href='/api/v1/getReports' data-item='отчеты'>отчеты</a></div>
+            <div class="menu_item"><a href='/api/v1/getActivity' data-item='активность'>активность</a></div>
+            <div class="menu_item"><a href='/user/logout' data-item='выйти'>выйти</a></div>
+        </div>
+
+        <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" class="menu-small">
+            <div class="menu_small_item"><a href='/api/v1/home' data-item='главная'>главная</a></div>
+            <div class="menu_small_item"><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></div>
+            <div class="menu_small_item"><a href='/api/v1/getNutritionPage' data-item='питание'>питание</a></div>
+            <div class="menu_small_item"><a href='/api/v1/getReports' data-item='отчеты'>отчеты</a></div>
+            <div class="menu_small_item"><a href='/api/v1/getActivity' data-item='активность'>активность</a></div>
+            <div class="menu_small_item"><a href='/user/logout' data-item='выйти'>выйти</a></div>
+        </div>
+
+        <div th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}" class="menu">
+            <div class="menu_item"><a href="/api/v1/home"  data-item='главная'>главная</a></div>
+            <div class="menu_item"><a th:href="@{'/user/' + ${userId}}" data-item='страница пользователя'>страница пользователя</a></div>
+            <div class="menu_item"><a th:href="@{'/api/v1/getWorkoutPage/' + ${userId}}" data-item='тренировки'>тренировки</a></div>
+            <div class="menu_item"><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></div>
+            <div class="menu_item"><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></div>
+            <!--            <div class="menu_item"><a href='/user/logout' data-item='выйти'>выйти</a></div>-->
+        </div>
+
+        <div th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}" class="menu-small">
+            <div class="menu_small_item"><a href="/api/v1/home"  data-item='главная'>главная</a></div>
+            <div class="menu_small_item"><a th:href="@{'/user/' + ${userId}}" data-item='страница пользователя'>страница пользователя</a></div>
+            <div class="menu_small_item"><a th:href="@{'/api/v1/getWorkoutPage/' + ${userId}}" data-item='тренировки'>тренировки</a></div>
+            <div class="menu_small_item"><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></div>
+            <div class="menu_small_item"><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></div>
+            <!--            <div class="menu_small_item"><a href='/api/v1/home' data-item='главная'>главная</a></div>-->
+            <!--            <div class="menu_small_item"><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></div>-->
+            <!--            <div class="menu_small_item"><a href='/api/v1/getNutritionPage' data-item='питание'>питание</a></div>-->
+            <!--            <div class="menu_small_item"><a href='/api/v1/getReports' data-item='отчеты'>отчеты</a></div>-->
+            <!--            <div class="menu_small_item"><a href='/api/v1/getActivity' data-item='активность'>активность</a></div>-->
+            <!--            <div class="menu_small_item"><a href='/user/logout' data-item='выйти'>выйти</a></div>-->
+        </div>
+        <div class="menu_small_icon">
+            <div class="stick"></div>
+            <div class="stick"></div>
+            <div class="stick"></div>
+        </div>
+
+    </div>
 </div>
 <div class="profile">
     <h2>План тренировок</h2>
@@ -92,7 +142,58 @@
         </tbody>
     </table>
 </div>
+<script>
+    let condition = true;
 
+    function forward() {
+        anime({
+            targets: '.menu-small',
+            translateX: ['-100%', '0'],
+            easing: 'easeInOutQuad',
+            direction: 'alternate',
+            duration: 500,
+            loop: false
+        });
+
+        condition = false
+    }
+
+    function backward() {
+        anime({
+            targets: '.menu-small',
+            translateX: ['0', '-100%'],
+            easing: 'easeInOutQuad',
+            direction: 'alternate',
+            duration: 500,
+            loop: false
+        });
+
+        condition = true
+    }
+
+    $('.menu_small_icon').click(function () {
+        if (condition) {
+            forward();
+        } else {
+            backward();
+        }
+    });
+
+    let start = 0;
+    let end = 0;
+    $('.container').on('touchstart', function (event) {
+        start = event.originalEvent.touches[0].pageX;
+    });
+    $('.container').on('touchend', function (event) {
+        end = event.originalEvent.changedTouches[0].pageX;
+        if (end - start >= 100 && condition) {
+            forward();
+        } else if (start - end >= 100 && !condition) {
+            backward();
+        }
+
+    });
+</script>
 </body>
 </html>
 
