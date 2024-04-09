@@ -3,12 +3,10 @@ package com.example.security20.controller;
 import ch.qos.logback.core.util.DelayStrategy;
 import com.example.security20.dto.CustomUserDetails;
 import com.example.security20.dto.UserDTO;
-import com.example.security20.entity.Nutrition;
-import com.example.security20.entity.User;
-import com.example.security20.entity.UserPhysicalParameters;
-import com.example.security20.entity.WorkoutPlan;
+import com.example.security20.entity.*;
 import com.example.security20.repository.UserPhysicalParametersRepository;
 import com.example.security20.repository.UserRepository;
+import com.example.security20.service.MailService;
 import com.example.security20.service.NutritionService;
 import com.example.security20.service.UserService;
 import com.example.security20.service.WorkoutPlanService;
@@ -24,6 +22,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -38,9 +37,12 @@ public class UserController {
     private WorkoutPlanService workoutPlanService;
     @Autowired
     private NutritionService nutritionService;
+    @Autowired
+    MailService mailService;
 
     @GetMapping("/logout")
     public String logout() {
+
         return "login";
     }
     @GetMapping("/{userId}")
@@ -69,6 +71,7 @@ public class UserController {
     }
     @PostMapping("/create")
     public String userSave(Authentication authentication, @ModelAttribute("user") User user, Model model){
+
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         if (userDetails.getRole().equals("ROLE_COACH")){
             user.setRoles("ROLE_USER");
@@ -76,6 +79,7 @@ public class UserController {
             user.setRoles("ROLE_COACH");
         }
 //        user.setRoles("ROLE_ADMIN");
+        mailService.sendMail(user, MailType.REGISTRATION, new Properties());
         userService.createUser(user);
         return "redirect:/api/v1/home";
     }
