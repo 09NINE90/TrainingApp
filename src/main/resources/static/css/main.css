@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&amp;amp;amp;amp;amp;amp;display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -32,12 +34,11 @@ a{
     padding-top: 20px;
     padding-bottom: 200px;
     margin-top: 50px;
-    padding-inline: 200px;
+    padding-inline: 10%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     position: relative;
-    z-index: 400;
     width: 60%;
     background: #000;
     border-radius: 20px;
@@ -46,7 +47,7 @@ a{
 }
 .profile p{
     padding: 10px;
-    z-index: 1000;
+    /* z-index: 1000; */
     color: #ffffff;
     opacity: 1;
 }
@@ -71,7 +72,8 @@ a{
 }
 .profile table{
     color: #ffffff;
-    z-index: 9999;
+    /* z-index: 9999; */
+
 }
 nav {
     padding-top: 15px;
@@ -191,7 +193,7 @@ input[type="submit"]:active
 {
     opacity: 0.6;
 }
-@media (max-width: 900px)
+/* @media (max-width: 900px)
 {
     section span
     {
@@ -209,7 +211,7 @@ input[type="submit"]:active
 }
 
 /* Стили для мобильных устройств */
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
     .nav {
         display: block;
         text-align: center;
@@ -255,4 +257,192 @@ input[type="submit"]:active
     .add_btn {
         text-align: left;
     }
+}  */
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    /* font-size: 1.5em; */
 }
+
+.container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* min-height: 100vh; */
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    z-index: 999;
+    color: white;
+}
+
+.menu {
+    width: 60vw;
+    height: 2em;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.menu a{
+    color: #ce0000;
+}
+
+.menu a:hover{
+    color: #fff;
+}
+
+.menu_item {
+    margin-right: 1em;
+    display: flex;
+
+}
+
+.menu_small_icon {
+    display: none;
+}
+
+.menu-small {
+    display: none;
+    /* height: 100vh; */
+}
+
+.menu_small_item {
+    display: none;
+}
+
+.stick {
+    width: 80%;
+    height: 5px;
+    background: white;
+}
+
+.inner {
+    padding: 1em 0 0 0;
+    width: 60%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .profile h2{
+        font-size: 24px;
+    }
+    .menu {
+        display: none;
+    }
+
+    .menu-small {
+
+        display: flex;
+        flex-direction: column;
+        height: 90vh;
+        margin-top: 100px;
+        width: 100%;
+        padding: 0;
+        position: absolute;
+        background: black;
+
+        transform: translateX(-100%);
+
+    }
+
+    .menu_small_item {
+        height: 2em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        /* background: pink; */
+    }
+
+    .menu_small_item a{
+        color: #ce0000;
+        text-transform: uppercase;
+        font-size: 24px;
+
+    }
+
+
+
+
+    .menu_small_item:first-child {
+        padding-top: calc(50px + 2em);
+    }
+
+    .menu_small_icon {
+        position: absolute;
+        top: 1em;
+        left: 1em;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        /* z-index: 9900; */
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        color: #000;
+    }
+
+    .inner {
+        padding-top: calc(50px + 2em);
+    }
+
+    .inner p {
+        margin: 0
+    }
+
+    .profile{
+        padding-top: 100px;
+
+        margin-top: 0;
+        width: 90vw;
+
+    }
+
+    table{
+        padding-top: 20px;
+        max-width: 80vw;
+        margin-top: 20px;
+
+    }
+
+    th {
+        font-size: 10px;
+        font-weight: normal;
+        background: #000;
+        border-top: 4px solid #fff;
+        border-bottom: 1px solid #ece3e3;
+        color: #ffffff;
+        padding: 8px;
+    }
+    td {
+        font-size: 10px;
+        background: #181818;
+        /*border-bottom: 1px solid white;*/
+        color: #fff;
+        border-top: 1px solid;
+        text-align: center;
+        padding: 8px;
+    }
+
+    .add_btn a{
+        font-size: 14px;
+    }
+
+    .contact{
+        margin-top: 25px;
+        font-size: 14px;
+    }
+
+
+}
+
+
