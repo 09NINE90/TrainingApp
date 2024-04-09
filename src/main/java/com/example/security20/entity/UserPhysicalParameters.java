@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user_physical_parameters")
+@Table(name = "user_phys_parameters")
 public class UserPhysicalParameters {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,13 +24,15 @@ public class UserPhysicalParameters {
 
     private double weight; // Вес
 
-    private double height; // Рост
+    private double armCircumference; //Обхват руки
 
-    private double armCircumference; //Обхват рук
+    private double legGirth; //Обхват ноги
+
+    private double chestCircumference; //Обхват грудной клетки
 
     private double hipCircumference; //Обхват бедер
 
-    private double waistCircumference; //Обхват талии
+    private double waistCircumference; //Обхват талии (под пупком)
 
     private String date; //Дата обновления параметров
 

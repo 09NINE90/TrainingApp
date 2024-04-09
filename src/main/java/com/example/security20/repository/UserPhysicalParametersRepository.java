@@ -12,11 +12,11 @@ import java.util.List;
 
 @Repository
 public interface UserPhysicalParametersRepository extends JpaRepository<UserPhysicalParameters,Long> {
-    @Query(value = "SELECT * FROM user_physical_parameters u WHERE user_id = :userId ORDER BY u.id DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM user_phys_parameters u WHERE user_id = :userId ORDER BY u.id DESC", nativeQuery = true)
     List<UserPhysicalParameters> findPhysicalParametersByUserId(@Param("userId") Long userId);
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM user_physical_parameters u WHERE user_id = :userId", nativeQuery = true)
+    @Query(value = "DELETE FROM user_phys_parameters u WHERE user_id = :userId", nativeQuery = true)
     void deletePhysicalParametersByUserId(@Param("userId") Long userId);
 
 }

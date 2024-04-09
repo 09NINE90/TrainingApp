@@ -81,7 +81,7 @@ public class UserController {
             user.setRoles("ROLE_COACH");
         }
 //        user.setRoles("ROLE_ADMIN");
-//        mailService.sendMail(user, MailType.REGISTRATION, new Properties());
+        mailService.sendMail(user, MailType.REGISTRATION, new Properties());
         userService.createUser(user);
         return "redirect:/api/v1/home";
     }
