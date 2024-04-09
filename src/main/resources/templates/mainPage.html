@@ -39,24 +39,24 @@
     <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
         <thead>
         <tr>
-            <th>Возраст</th>
-            <th>Рост (см)</th>
             <th>Вес (кг)</th>
-            <th>Обхват рук (см)</th>
-            <th>Обхват бедра (см)</th>
+            <th>Обхват ноги (см)</th>
+            <th>Обхват руки (см)</th>
+            <th>Обхват бедер (см)</th>
             <th>Обхват талии (см)</th>
+            <th>Обхват грудной клетки (см)</th>
             <th>Дата</th>
             <!-- Добавьте другие колонки по необходимости -->
         </tr>
         </thead>
         <tbody>
         <tr th:each="physicalParameters : ${userPhysicalParametersList}">
-            <td th:text="${physicalParameters.age}"></td>
-            <td th:text="${physicalParameters.height}"></td>
             <td th:text="${physicalParameters.weight}"></td>
+            <td th:text="${physicalParameters.legGirth}"></td>
             <td th:text="${physicalParameters.armCircumference}"></td>
             <td th:text="${physicalParameters.hipCircumference}"></td>
             <td th:text="${physicalParameters.waistCircumference}"></td>
+            <td th:text="${physicalParameters.chestCircumference}"></td>
             <td th:text="${physicalParameters.date}"></td>
             <!-- Добавьте другие ячейки по необходимости -->
         </tr>
