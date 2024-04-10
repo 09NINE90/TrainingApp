@@ -3,6 +3,7 @@ package com.example.security20.service.impl;
 import com.example.security20.entity.Activity;
 import com.example.security20.repository.ActivityRepository;
 import com.example.security20.service.ActivityService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class ActivityServiceImpl implements ActivityService {
     public void saveActivity(Activity activity) {
         activityRepository.save(activity);
     }
-
+    @Transactional
     @Override
     public void deleteById(Long activityId) {
         activityRepository.deleteById(activityId);

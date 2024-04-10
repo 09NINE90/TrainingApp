@@ -21,6 +21,6 @@ public class Nutrition {
     private Double fats; // жиры
     private Double carbohydrates; // углеводы
     private String date; // дата и время приема пищи
-
+    private Long weekId;
     private Long userId;
 }

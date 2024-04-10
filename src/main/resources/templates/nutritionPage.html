@@ -14,25 +14,7 @@
 </head>
 <body>
 <div class="nav">
-<!--    <nav th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">-->
-<!--        <ul class="menuItems">-->
-<!--            <li><a href='/api/v1/home' data-item='главная'>главная</a></li>-->
-<!--            <li><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></li>-->
-<!--            <li><a href='/api/v1/getNutritionPage' data-item='питание'>питание</a></li>-->
-<!--            <li><a href='/api/v1/getReports' data-item='отчеты'>отчеты</a></li>-->
-<!--            <li><a href='/api/v1/getActivity' data-item='активность'>активность</a></li>-->
-<!--            <li><a href='/user/logout' data-item='выйти'>выйти</a></li>-->
-<!--        </ul>-->
-<!--    </nav>-->
-<!--    <nav th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">-->
-<!--        <ul class="menuItems">-->
-<!--            <li><a href="/api/v1/home"  data-item='главная'>главная</a></li>-->
-<!--            <li><a th:href="@{'/user/' + ${userId}}" data-item='страница пользователя'>страница пользователя</a></li>-->
-<!--            <li><a th:href="@{'/api/v1/getWorkoutPage/' + ${userId}}" data-item='тренировки'>тренировки</a></li>-->
-<!--            <li><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></li>-->
-<!--            <li><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></li>-->
-<!--        </ul>-->
-<!--    </nav>-->
+
     <div class="container">
         <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" class="menu">
             <div class="menu_item"><a href='/api/v1/home' data-item='главная'>главная</a></div>
@@ -67,12 +49,7 @@
             <div class="menu_small_item"><a th:href="@{'/api/v1/getWorkoutPage/' + ${userId}}" data-item='тренировки'>тренировки</a></div>
             <div class="menu_small_item"><a th:href="@{'/api/v1/getNutritionPage/' + ${userId}}" data-item='питание'>питание</a></div>
             <div class="menu_small_item"><a th:href="@{'/api/v1/getActivity/' + ${userId}}" data-item='активность'>активность</a></div>
-            <!--            <div class="menu_small_item"><a href='/api/v1/home' data-item='главная'>главная</a></div>-->
-            <!--            <div class="menu_small_item"><a href='/api/v1/getWorkoutPage' data-item='тренировки'>тренировки</a></div>-->
-            <!--            <div class="menu_small_item"><a href='/api/v1/getNutritionPage' data-item='питание'>питание</a></div>-->
-            <!--            <div class="menu_small_item"><a href='/api/v1/getReports' data-item='отчеты'>отчеты</a></div>-->
-            <!--            <div class="menu_small_item"><a href='/api/v1/getActivity' data-item='активность'>активность</a></div>-->
-            <!--            <div class="menu_small_item"><a href='/user/logout' data-item='выйти'>выйти</a></div>-->
+
         </div>
         <div class="menu_small_icon">
             <div class="stick"></div>
@@ -83,7 +60,73 @@
     </div>
 </div>
 <div class="profile">
-    <h2>Питание</h2>
+    <h2>План питания</h2>
+    <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
+        <a th:href="@{'/api/v1/setNutritionPlan/' + ${userId}}" data-item='Добавить план питания'>Добавить план питания</a>
+    </div>
+    <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <thead>
+        <tr>
+            <th>Калорийность</th>
+            <th>Белки (г)</th>
+            <th>Жиры (г)</th>
+            <th>Углеводы (г)</th>
+            <th>Вес</th>
+            <th>Период</th>
+            <!--            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Удаление приема пищи</th>-->
+            <!-- Добавьте другие колонки по необходимости -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="nutrition : ${nutritionPlan}">
+            <td th:text="${nutrition.calories}"></td>
+            <td th:text="${nutrition.proteins}"></td>
+            <td th:text="${nutrition.fats}"></td>
+            <td th:text="${nutrition.carbohydrates}"></td>
+            <td th:text="${nutrition.weight}"></td>
+            <td th:text="${nutrition.duration}"></td>
+            <!--            <td th:text="${nutrition.date}"></td>-->
+            <!--            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteNutrition/' + ${nutrition.id}}">Удалить</a></td>-->
+            <!-- Добавьте другие ячейки по необходимости -->
+        </tr>
+        </tbody>
+    </table>
+    <table th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
+        <thead>
+        <tr>
+            <th>Калорийность</th>
+            <th>Белки (г)</th>
+            <th>Жиры (г)</th>
+            <th>Углеводы (г)</th>
+            <th>Вес</th>
+            <th>Период</th>
+            <th th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">Удаление плана</th>
+            <!-- Добавьте другие колонки по необходимости -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="nutritionPlan : ${nutritionPlanList}">
+            <td th:text="${nutritionPlan.calories}"></td>
+            <td th:text="${nutritionPlan.proteins}"></td>
+            <td th:text="${nutritionPlan.fats}"></td>
+            <td th:text="${nutritionPlan.carbohydrates}"></td>
+            <td th:text="${nutritionPlan.weight}"></td>
+            <td th:text="${nutritionPlan.duration}"></td>
+<!--            <td th:text="${nutrition.date}"></td>-->
+            <td th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}"><a th:href="@{'/api/v1/deleteNutritionPlan/' + ${nutritionPlan.id} + '/' + ${userId}}">Удалить</a></td>
+            <!-- Добавьте другие ячейки по необходимости -->
+        </tr>
+        </tbody>
+    </table>
+    <div class="contact" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <p>РЕКОМЕНДАЦИИ</p>
+        <p>Стоп продукты - Все продукты в которых есть транс жиры (маргарин, пальмовое, гидролизированное масло)</p>
+        <p>Ограничиваем - Сахар и фруктозу ( в % соотношении на каждый день), сахара заменитель.</p>
+        <p>Вода в день не менее 2,5 л. - 3 л. - 50 % чистая вода</p>
+        <p>Все спортивное питание так же учитывается в КАЛОРИЙНОСТИ ДНЯ!</p>
+        <p>В БЖУ учитываем ВСЕ - кроме зеленых овощей и клетчатки</p>
+        <p>Каждый день все забиваем в эту форму</p>
+    </div>
     <form class="form" th:action="@{/api/v1/addNutrition}"  th:object="${nutrition}" method="post" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
 
         <div class="inputBox">
@@ -114,6 +157,13 @@
         </div>
     </form>
 
+    <div class="contact">
+        <p>Средние значения за неделю № <span th:text="${week}"></span>:</p>
+        <p> - Калории: <span th:text="${calories}"></span></p>
+        <p> - Белки: <span th:text="${proteins}"></span></p>
+        <p> - Жиры: <span th:text="${fats}"></span></p>
+        <p> - Углеводы: <span th:text="${carbohydrates}"></span></p>
+    </div>
     <table>
         <thead>
         <tr>
@@ -124,7 +174,7 @@
             <th>Жиры (г)</th>
             <th>Углеводы (г)</th>
             <th>Дата и время приема пищи</th>
-            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Удаление приема пищи</th>
+<!--            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Удаление приема пищи</th>-->
             <!-- Добавьте другие колонки по необходимости -->
         </tr>
         </thead>
@@ -137,7 +187,7 @@
             <td th:text="${nutrition.fats}"></td>
             <td th:text="${nutrition.carbohydrates}"></td>
             <td th:text="${nutrition.date}"></td>
-            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteNutrition/' + ${nutrition.id}}">Удалить</a></td>
+<!--            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteNutrition/' + ${nutrition.id}}">Удалить</a></td>-->
             <!-- Добавьте другие ячейки по необходимости -->
         </tr>
         </tbody>

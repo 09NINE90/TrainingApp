@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Форма для плана тренировок</title>
+    <title>Форма для плана питания</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
@@ -19,53 +19,26 @@
         <div class="content">
 
             <h2>Тренировка</h2>
-            <form class="form" th:action="@{/api/v1/setWorkoutPlan/{userId}(userId=${userId})}"  th:object="${workoutPlan}" method="post">
-
+            <form class="form" th:action="@{/api/v1/setNutritionPlan/{userId}(userId=${userId})}"  th:object="${nutritionPlan}" method="post">
                 <div class="inputBox">
-                    <input type="text"  th:field="*{dayOfWeek}" name="dayOfWeek" required><i>Название тренировки</i>
+                    <input type="number"  th:field="*{calories}" name="calories" required><i>Калории</i>
                 </div>
-                <div class="row">
-                    <div class="column">
-                        <div class="inputBox widthInput">
-                            <input type="text"  th:field="*{exercises1}" name="exercises" required><i>Упражнение 1</i>
-                        </div>
-                        <div class="inputBox widthInput">
-                            <input type="text"  th:field="*{exercises2}" name="exercises" required><i>Упражнение 2</i>
-                        </div>
-                        <div class="inputBox widthInput">
-                            <input type="text"  th:field="*{exercises3}" name="exercises" required><i>Упражнение 3</i>
-                        </div>
-                        <div class="inputBox widthInput">
-                            <input type="text"  th:field="*{exercises4}" name="exercises" required><i>Упражнение 4</i>
-                        </div>
-                        <div class="inputBox widthInput">
-                            <input type="text"  th:field="*{exercises5}" name="exercises" required><i>Упражнение 5</i>
-                        </div>
-                        <div class="inputBox widthInput">
-                            <input type="text"  th:field="*{exercises6}" name="exercises" required><i>Упражнение 6</i>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="inputBox widthInput">
-                            <input type="text"  th:field="*{repetitions1}" name="repetitions1" required><i>Повторения 1</i>
-                        </div>
-                        <div class="inputBox widthInput">
-                            <input type="text"  th:field="*{repetitions2}" name="repetitions2" required><i>Повторения 2</i>
-                        </div>
-                        <div class="inputBox widthInput">
-                            <input type="text"  th:field="*{repetitions3}" name="repetitions3" required><i>Повторения 3</i>
-                        </div>
-                        <div class="inputBox widthInput">
-                            <input type="text"  th:field="*{repetitions4}" name="repetitions4" required><i>Повторения 4</i>
-                        </div>
-                        <div class="inputBox widthInput">
-                            <input type="text"  th:field="*{repetitions5}" name="repetitions5" required><i>Повторения 5</i>
-                        </div>
-                        <div class="inputBox widthInput">
-                            <input type="text"  th:field="*{repetitions6}" name="repetitions6" required><i>Повторения 6</i>
-                        </div>
-                    </div>
+                <div class="inputBox">
+                    <input type="number"  th:field="*{proteins}" name="proteins" required><i>Белки</i>
                 </div>
+                <div class="inputBox">
+                    <input type="number"  th:field="*{fats}" name="fats" required><i>Жиры</i>
+                </div>
+                <div class="inputBox">
+                    <input type="number"  th:field="*{carbohydrates}" name="carbohydrates" required><i>Углеводы</i>
+                </div>
+                <div class="inputBox">
+                    <input type="number"  th:field="*{weight}" name="weight" required><i>Вес человека</i>
+                </div>
+                <div class="inputBox">
+                    <input type="text"  th:field="*{duration}" name="exercises" required><i>Период плана (даты)</i>
+                </div>
+
                 <div class="inputBox">
 
                     <input type="submit" value="добавить">

@@ -7,6 +7,7 @@ import com.example.security20.mapper.UserMapper;
 import com.example.security20.repository.UserPhysicalParametersRepository;
 import com.example.security20.repository.UserRepository;
 import com.example.security20.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,12 +41,13 @@ public class UserServiceImpl implements UserService {
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
-
+    @Transactional
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 
+    @Transactional
     @Override
     public void deleteUserPhysicalParameters(Long id) {
         physicalParametersRepository.deletePhysicalParametersByUserId(id);
