@@ -5,6 +5,7 @@ import com.example.security20.entity.WorkoutPlan;
 import com.example.security20.repository.ReportOfWorkoutRepository;
 import com.example.security20.repository.WorkoutPlanRepository;
 import com.example.security20.service.WorkoutPlanService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
     public void saveWorkoutPlan(WorkoutPlan plan) {
         workoutPlanRepository.save(plan);
     }
-
+    @Transactional
     @Override
     public void deleteWorkoutPlanById(Long id) {
         workoutPlanRepository.deleteById(id);

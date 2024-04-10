@@ -338,7 +338,11 @@ body {
     .menu {
         display: none;
     }
-
+    .form .inputBox
+    {
+        width: 80%;
+        font-size: 14px;
+    }
     .menu-small {
 
         display: flex;
