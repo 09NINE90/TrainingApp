@@ -3,18 +3,28 @@ package com.example.security20.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "week_nutrition")
+@Table(name = "week_nutrition_2")
 @ToString
 public class WeekNutrition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private int numOfWeek; // номер недели в таблице
-    private int numDayOfWeek; // номер ддня недели
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date weekStart;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date weekEnd;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date lastDate;
+    String checkDays;
     private int countDaysOfWeek; // количество записей в неделе
     private Double sumCalories; // сумма ккал за неделю
     private Double sumProteins; // сумма белки за неделю
@@ -22,4 +32,6 @@ public class WeekNutrition {
     private Double sumCarbohydrates; //  сумма углеводы за неделю
 
     private Long userId; // id пользователя, которому пренадлежит запись
+
+
 }

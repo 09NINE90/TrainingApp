@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Entity
 @Data
@@ -18,8 +21,8 @@ public class Activity {
     private String nameActivity; // название активности (шаги, бег, велосипед и тд.)
 
     private String activityLoad; // нагрузка
-
-    private String date; // дата активности
-
+    @Column(columnDefinition = "TIMESTAMP USING date::TIMESTAMP(6) WITHOUT TIME ZONE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date; // дата активности
     private Long userId;
 }

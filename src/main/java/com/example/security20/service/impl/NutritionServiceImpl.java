@@ -11,8 +11,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class NutritionServiceImpl implements NutritionService {
@@ -33,28 +33,28 @@ public class NutritionServiceImpl implements NutritionService {
         return nutritionRepository.getNutritionByUserId(userId);
     }
 
-    @Transactional
-    @Override
-    public void deleteById(Long id) {
-        Optional<Nutrition> nutritionOptional = nutritionRepository.findById(id);
-        Nutrition nutrition = nutritionOptional.get();
-        Optional<WeekNutrition> weekNutritionOptional = weekNutritionRepository.findById(nutrition.getWeekId());
-        WeekNutrition weekNutrition = weekNutritionOptional.get();
-        double calories = weekNutrition.getSumCalories() - nutrition.getCalories();
-        double proteins = weekNutrition.getSumProteins() - nutrition.getProteins();
-        double fats = weekNutrition.getSumFats() - nutrition.getFats();
-        double carbs = weekNutrition.getSumCarbohydrates() - nutrition.getCarbohydrates();
-
-        updateWeekNutrition(weekNutrition.getUserId(),
-                            weekNutrition.getNumDayOfWeek(),
-                            weekNutrition.getNumOfWeek(),
-                            weekNutrition.getCountDaysOfWeek(),
-                            calories,
-                            proteins,
-                            fats,
-                            carbs);
-        nutritionRepository.deleteById(id);
-    }
+//    @Transactional
+//    @Override
+//    public void deleteById(Long id) {
+//        Optional<Nutrition> nutritionOptional = nutritionRepository.findById(id);
+//        Nutrition nutrition = nutritionOptional.get();
+//        Optional<WeekNutrition> weekNutritionOptional = weekNutritionRepository.findById(nutrition.getWeekId());
+//        WeekNutrition weekNutrition = weekNutritionOptional.get();
+//        double calories = weekNutrition.getSumCalories() - nutrition.getCalories();
+//        double proteins = weekNutrition.getSumProteins() - nutrition.getProteins();
+//        double fats = weekNutrition.getSumFats() - nutrition.getFats();
+//        double carbs = weekNutrition.getSumCarbohydrates() - nutrition.getCarbohydrates();
+//
+//        updateWeekNutrition(weekNutrition.getUserId(),
+//                            weekNutrition.getNumDayOfWeek(),
+//                            weekNutrition.getNumOfWeek(),
+//                            weekNutrition.getCountDaysOfWeek(),
+//                            calories,
+//                            proteins,
+//                            fats,
+//                            carbs);
+//        nutritionRepository.deleteById(id);
+//    }
 
     @Transactional
     @Override
@@ -64,22 +64,27 @@ public class NutritionServiceImpl implements NutritionService {
 
 
     @Override
-    public WeekNutrition getLastWeekNutritionByUserId(Long userId) {
+    public WeekNutrition findLastWeekNutritionByUserIdAndWeekStart(Long userId, Date startWeek) {
+        return weekNutritionRepository.findLastWeekNutritionByUserIdAndWeekStart(userId, startWeek);
+    }
+
+    @Override
+    public WeekNutrition findLastWeekNutritionByUserId(Long userId) {
         return weekNutritionRepository.findLastWeekNutritionByUserId(userId);
     }
 
     @Transactional
     @Override
-    public void updateWeekNutrition(Long userId, int numDayOfWeek, int numOfWeek,int countDaysOfWeek, Double sumCalories, Double sumProteins, Double sumFats, Double sumCarbohydrates) {
-        int a = weekNutritionRepository.updateWeekNutrition(userId,
-                                                    numDayOfWeek,
-                                                    numOfWeek,
+    public void updateWeekNutrition(Long userId, int countDaysOfWeek, Date lastDate, Date startWeek, String checkDays, Double sumCalories, Double sumProteins, Double sumFats, Double sumCarbohydrates) {
+        weekNutritionRepository.updateWeekNutrition(userId,
                                                     countDaysOfWeek,
+                                                    lastDate,
+                                                    startWeek,
+                                                    checkDays,
                                                     sumCalories,
                                                     sumProteins,
                                                     sumFats,
                                                     sumCarbohydrates);
-        System.out.println(a);
     }
 
     @Override
