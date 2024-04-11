@@ -90,7 +90,7 @@
         <tr th:each="activity : ${activityList}">
             <td th:text="${activity.nameActivity}"></td>
             <td th:text="${activity.activityLoad}"></td>
-            <td th:text="${activity.date}"></td>
+            <td th:text="${#dates.format(activity.date, 'dd/MM/yyyy')}"></td>
             <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteActivity/' + ${activity.id}}">Удалить</a></td>
             <!-- Добавьте другие ячейки по необходимости -->
         </tr>

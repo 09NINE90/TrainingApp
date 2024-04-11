@@ -4,7 +4,6 @@ import com.example.security20.dto.CustomUserDetails;
 import com.example.security20.entity.Nutrition;
 import com.example.security20.entity.NutritionPlan;
 import com.example.security20.entity.WeekNutrition;
-import com.example.security20.entity.WorkoutPlan;
 import com.example.security20.service.NutritionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,9 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -25,7 +25,7 @@ public class NutritionController {
 
     @GetMapping("/deleteNutrition/{nutritionId}")
     public String deleteNutrition(@PathVariable("nutritionId") Long nutritionId){
-        nutritionService.deleteById(nutritionId);
+//        nutritionService.deleteById(nutritionId);
         return "redirect:/api/v1/getNutritionPage";
     }
     @GetMapping("/deleteNutritionPlan/{nutritionPlanId}/{userId}")
@@ -69,61 +69,75 @@ public class NutritionController {
     public String addNutrition(Authentication authentication, @ModelAttribute("nutrition") Nutrition nutrition) throws ParseException {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         Long userId = userDetails.getId();
-        Calendar myDate = new GregorianCalendar();
-        String dateStr = nutrition.getDate().replace("T","  ");
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd H:m", Locale.ENGLISH);
-        Date date = format.parse(dateStr);
-        myDate.setTime(date);
-        int myDayOfWeek = myDate.get(Calendar.DAY_OF_WEEK);
 
-        double calories =  Math.ceil((nutrition.getCalories() * nutrition.getWeight() / 100) * 100) / 100;
-        double proteins =  Math.ceil((nutrition.getProteins() * nutrition.getWeight() / 100) * 100) / 100;
-        double fats = Math.ceil((nutrition.getFats() * nutrition.getWeight() / 100) * 100) / 100;
-        double carbohydrates = Math.ceil((nutrition.getCarbohydrates() * nutrition.getWeight() / 100) * 100) / 100;
-        System.out.println(calories);
+        Date date =  nutrition.getDate();
+        List<Date> dateList = getWeekStartEnd(date);
+        Date startOfWeekDate = dateList.get(0);
+        Date endOfWeekDate = dateList.get(1);
+        Date myDate = dateList.get(2);
+        String checkDays = myDate.toString().split(" ")[2];
+        double weightFactor = nutrition.getWeight() / 100.0;
+        double calories = nutrition.getCalories() * weightFactor;
+        double proteins = nutrition.getProteins() * weightFactor;
+        double fats = nutrition.getFats() * weightFactor;
+        double carbohydrates = nutrition.getCarbohydrates() * weightFactor;
+
         WeekNutrition weekNutrition;
-        WeekNutrition lastWeekNutrition = nutritionService.getLastWeekNutritionByUserId(userId);
-        int countDaysOfWeek;
+        WeekNutrition lastWeekNutrition = nutritionService.findLastWeekNutritionByUserIdAndWeekStart(userId, startOfWeekDate);
         if (lastWeekNutrition == null){
             weekNutrition = new WeekNutrition();
-            addWeek(weekNutrition, userId, myDayOfWeek, 0, 1, calories, proteins, fats, carbohydrates);
-        } else{
-            if(lastWeekNutrition.getNumDayOfWeek() == 1 && myDayOfWeek == 2){
-                weekNutrition = new WeekNutrition();
-                countDaysOfWeek = 1;
-                addWeek(weekNutrition, userId, myDayOfWeek, lastWeekNutrition.getNumOfWeek(), countDaysOfWeek,calories, proteins, fats, carbohydrates);
-
-            }else {
-                if (lastWeekNutrition.getNumDayOfWeek() == myDayOfWeek){
-                    countDaysOfWeek = lastWeekNutrition.getCountDaysOfWeek();
-                }else {
-                    countDaysOfWeek = lastWeekNutrition.getCountDaysOfWeek() + 1;
+            addWeek(weekNutrition, userId, startOfWeekDate, checkDays, endOfWeekDate, myDate, calories, proteins, fats, carbohydrates);
+        } else {
+            if (checkDateInWeekRange(lastWeekNutrition.getWeekStart(), lastWeekNutrition.getWeekEnd(), myDate)) {
+                int countDays;
+                String result;
+                List<String> stringList = new ArrayList<>(List.of(lastWeekNutrition.getCheckDays().split(",")));
+                if (!stringList.contains(checkDays)) {
+                    countDays = lastWeekNutrition.getCountDaysOfWeek() + 1;
+                    stringList.add(checkDays);
+                    StringJoiner joiner = new StringJoiner(",");
+                    for (String str : stringList) {
+                        joiner.add(str);
+                    }
+                    result = joiner.toString();
+                } else {
+                    countDays = lastWeekNutrition.getCountDaysOfWeek();
+                    result = lastWeekNutrition.getCheckDays();
                 }
-                nutritionService.updateWeekNutrition(userId, myDayOfWeek,
-                        lastWeekNutrition.getNumOfWeek(),
-                        countDaysOfWeek,
-                        lastWeekNutrition.getSumCalories() + calories,
-                        lastWeekNutrition.getSumProteins() + proteins,
-                        lastWeekNutrition.getSumFats() + fats,
-                        lastWeekNutrition.getSumCarbohydrates() + carbohydrates);
+                nutritionService.updateWeekNutrition(userId,
+                        countDays,
+                        myDate,
+                        startOfWeekDate,
+                        result,
+                        calories,
+                        proteins,
+                        fats,
+                        carbohydrates);
+            }
+            else {
+                weekNutrition = new WeekNutrition();
+                addWeek(weekNutrition, userId, startOfWeekDate, checkDays, endOfWeekDate, myDate, calories, proteins, fats, carbohydrates);
             }
         }
-        WeekNutrition lastWeekNutrition1 = nutritionService.getLastWeekNutritionByUserId(userId);
+
+        WeekNutrition lastWeekNutrition1 = nutritionService.findLastWeekNutritionByUserIdAndWeekStart(userId, startOfWeekDate);
         nutrition.setWeekId(lastWeekNutrition1.getId());
         nutrition.setUserId(userId);
         nutrition.setCalories(calories);
         nutrition.setProteins(proteins);
         nutrition.setFats(fats);
         nutrition.setCarbohydrates(carbohydrates);
-        nutrition.setDate(dateStr);
+        nutrition.setDate(date);
 
         nutritionService.saveNutrition(nutrition);
         return "redirect:/api/v1/getNutritionPage";
     }
-    private void addWeek(WeekNutrition weekNutrition, Long userId, int numDayOfWeek, int numOfWeek, int countDaysOfWeek, Double sumCalories, Double sumProteins, Double sumFats, Double sumCarbohydrates){
-        weekNutrition.setNumOfWeek(numOfWeek + 1);
-        weekNutrition.setNumDayOfWeek(numDayOfWeek);
-        weekNutrition.setCountDaysOfWeek(countDaysOfWeek);
+    private void addWeek(WeekNutrition weekNutrition, Long userId, Date start, String checkDays, Date end, Date lastDate, Double sumCalories, Double sumProteins, Double sumFats, Double sumCarbohydrates){
+        weekNutrition.setWeekStart(start);
+        weekNutrition.setWeekEnd(end);
+        weekNutrition.setLastDate(lastDate);
+        weekNutrition.setCheckDays(checkDays);
+        weekNutrition.setCountDaysOfWeek(1);
         weekNutrition.setUserId(userId);
         weekNutrition.setSumCalories(sumCalories);
         weekNutrition.setSumProteins(sumProteins);
@@ -134,7 +148,7 @@ public class NutritionController {
 
     private void setNutritionPage(Model model, Long id){
         List<Nutrition> nutritionList = nutritionService.getNutritionByUserId(id);
-        WeekNutrition lastWeekNutrition = nutritionService.getLastWeekNutritionByUserId(id);
+        WeekNutrition lastWeekNutrition = nutritionService.findLastWeekNutritionByUserId(id);
         List<NutritionPlan> nutritionPlanList = nutritionService.getNutritionPlanByUserId(id);
         NutritionPlan nutritionPlan = nutritionService.getLastNutritionPlanByUserId(id);
         if (lastWeekNutrition != null){
@@ -142,7 +156,8 @@ public class NutritionController {
             model.addAttribute("proteins" , Math.round(lastWeekNutrition.getSumProteins()/lastWeekNutrition.getCountDaysOfWeek()));
             model.addAttribute("fats" , Math.round(lastWeekNutrition.getSumFats()/lastWeekNutrition.getCountDaysOfWeek()));
             model.addAttribute("carbohydrates" , Math.round(lastWeekNutrition.getSumCarbohydrates()/lastWeekNutrition.getCountDaysOfWeek()));
-            model.addAttribute("week", lastWeekNutrition.getNumOfWeek());
+            model.addAttribute("startWeek", lastWeekNutrition.getWeekStart());
+            model.addAttribute("endWeek", lastWeekNutrition.getWeekEnd());
         }
         if (!nutritionPlanList.isEmpty()){
             model.addAttribute("nutritionPlanList", nutritionPlanList);
@@ -151,5 +166,34 @@ public class NutritionController {
             model.addAttribute("nutritionPlan", nutritionPlan);
         }
         model.addAttribute("nutritionList", nutritionList);
+    }
+
+    private List<Date> getWeekStartEnd(Date date) {
+        // Преобразуем объект Date в LocalDateTime
+        LocalDateTime dateTime = Instant.ofEpochMilli(date.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        // Извлекаем из LocalDateTime только дату
+        LocalDate localDate = dateTime.toLocalDate();
+        // Определяем день недели для данной даты
+        DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+        // Находим начало недели
+        LocalDate startOfWeek = localDate.minusDays(dayOfWeek.getValue() - 1);
+        // Находим конец недели
+        LocalDate endOfWeek = startOfWeek.plusDays(6);
+
+        Date startOfWeekDate = Date.from(startOfWeek.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date endOfWeekDate = Date.from(endOfWeek.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date myDay = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        List<Date> dateList = new ArrayList<>();
+        dateList.add(startOfWeekDate);
+        dateList.add(endOfWeekDate);
+        dateList.add(myDay);
+        return dateList;
+    }
+
+    private boolean checkDateInWeekRange(Date startWeek, Date endWeek, Date myDate){
+        return !myDate.before(startWeek) && !myDate.after(endWeek);
     }
 }

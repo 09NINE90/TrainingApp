@@ -73,7 +73,7 @@
         <tbody>
             <th:block th:each="reportOfWorkout : ${reportOfWorkoutList}">
                 <tr>
-                    <td th:text="${reportOfWorkout.date}" rowspan="6"></td>
+                    <td th:text="${#dates.format(reportOfWorkout.date, 'dd/MM/yyyy')}" rowspan="6"></td>
                     <td th:text="${reportOfWorkout.exercises1}"></td>
                     <td th:text="${reportOfWorkout.repetitions1Plan}"></td>
                     <td th:text="${reportOfWorkout.repetitions1}"></td>
