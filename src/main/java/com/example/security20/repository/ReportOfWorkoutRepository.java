@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface ReportOfWorkoutRepository extends JpaRepository<ReportOfWorkout, Long> {
-    @Query(value = "SELECT * FROM report_of_workout r WHERE user_id = :userId ORDER BY r.id DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM report_of_workout r WHERE user_id = :userId ORDER BY r.date DESC", nativeQuery = true)
     List<ReportOfWorkout> findReportOfWorkoutByUserId(@Param("userId") Long userId);
 }

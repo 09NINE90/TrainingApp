@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping("/api/v1")
 public class PhysicalParametersController {
@@ -39,8 +41,6 @@ public class PhysicalParametersController {
         userPhysicalParameters.setUserId(userId);
 
         try {
-            String date = userPhysicalParameters.getDate();
-            userPhysicalParameters.setDate(date);
             userService.saveUserPhysicalParameters(userPhysicalParameters);
             // Возврат результата или представления с информацией о сохраненных параметрах
             return "redirect:/api/v1/home";

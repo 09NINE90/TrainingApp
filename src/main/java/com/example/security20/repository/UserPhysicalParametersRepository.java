@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public interface UserPhysicalParametersRepository extends JpaRepository<UserPhysicalParameters,Long> {
-    @Query(value = "SELECT * FROM user_phys_parameters u WHERE user_id = :userId ORDER BY u.id DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM user_phys_parameters u WHERE user_id = :userId ORDER BY u.date DESC", nativeQuery = true)
     List<UserPhysicalParameters> findPhysicalParametersByUserId(@Param("userId") Long userId);
     @Modifying
     @Transactional
