@@ -21,7 +21,7 @@ public class Activity {
     private String nameActivity; // название активности (шаги, бег, велосипед и тд.)
 
     private String activityLoad; // нагрузка
-    @Column(columnDefinition = "TIMESTAMP USING date::TIMESTAMP(6) WITHOUT TIME ZONE")
+    @Column(columnDefinition = "TIMESTAMP")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date; // дата активности
     private Long userId;

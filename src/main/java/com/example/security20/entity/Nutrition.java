@@ -23,7 +23,7 @@ public class Nutrition {
     private Double proteins; // белки
     private Double fats; // жиры
     private Double carbohydrates; // углеводы
-    @Column(columnDefinition = "TIMESTAMP USING date::TIMESTAMP(6) WITHOUT TIME ZONE")
+    @Column(columnDefinition = "TIMESTAMP")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date date; // дата и время приема пищи
     private Long weekId;

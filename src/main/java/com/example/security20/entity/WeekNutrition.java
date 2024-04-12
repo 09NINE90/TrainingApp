@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "week_nutrition_2")
+@Table(name = "week_nutrition")
 @ToString
 public class WeekNutrition {
     @Id

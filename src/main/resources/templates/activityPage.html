@@ -76,26 +76,28 @@
             <input type="submit" value="добавить">
         </div>
     </form>
-    <table>
-        <thead>
-        <tr>
-            <th>Название активности</th>
-            <th>Время/Растояние/Шаги</th>
-            <th>Дата</th>
-            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Удаление активности</th>
-            <!-- Добавьте другие колонки по необходимости -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="activity : ${activityList}">
-            <td th:text="${activity.nameActivity}"></td>
-            <td th:text="${activity.activityLoad}"></td>
-            <td th:text="${#dates.format(activity.date, 'dd/MM/yyyy')}"></td>
-            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteActivity/' + ${activity.id}}">Удалить</a></td>
-            <!-- Добавьте другие ячейки по необходимости -->
-        </tr>
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Название активности</th>
+                <th>Время/Растояние/Шаги</th>
+                <th>Дата</th>
+                <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Удаление активности</th>
+                <!-- Добавьте другие колонки по необходимости -->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="activity : ${activityList}">
+                <td th:text="${activity.nameActivity}"></td>
+                <td th:text="${activity.activityLoad}"></td>
+                <td th:text="${#dates.format(activity.date, 'dd/MM/yyyy')}"></td>
+                <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteActivity/' + ${activity.id}}">Удалить</a></td>
+                <!-- Добавьте другие ячейки по необходимости -->
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <script>
     let condition = true;

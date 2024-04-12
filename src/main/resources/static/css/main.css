@@ -124,6 +124,7 @@ nav {
 table{
     padding-top: 20px;
     margin-top: 20px;
+    width: 100%;
 }
 
 th {
@@ -172,7 +173,9 @@ td {
     font-weight: 500;
     font-size: 1em;
 }
-
+.table-container {
+    overflow-x: auto;
+}
 
 .form .inputBox input[type="submit"]
 {
@@ -405,15 +408,14 @@ body {
 
     .profile{
         padding-top: 100px;
-
         margin-top: 0;
-        width: 90vw;
+        width: 80vw;
 
     }
 
     table{
         padding-top: 20px;
-        max-width: 80vw;
+        max-width: 100%;
         margin-top: 20px;
 
     }
