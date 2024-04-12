@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface NutritionRepository extends JpaRepository<Nutrition,Long> {
-    @Query(value = "SELECT * FROM nutrition n WHERE user_id = :userId ORDER BY n.id DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM nutrition n WHERE user_id = :userId ORDER BY n.date DESC", nativeQuery = true)
     List<Nutrition> getNutritionByUserId(@Param("userId") Long userId);
 }

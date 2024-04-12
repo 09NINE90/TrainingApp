@@ -49,32 +49,34 @@
         <p>Email: <span th:text="${user.userName}"></span></p>
         <p>Телефон: <span th:text="${user.phoneNumber}"></span></p>
     </div>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
-        <thead>
-        <tr>
-            <th>Вес (кг)</th>
-            <th>Обхват ноги (см)</th>
-            <th>Обхват руки (см)</th>
-            <th>Обхват бедер (см)</th>
-            <th>Обхват талии (см)</th>
-            <th>Обхват грудной клетки (см)</th>
-            <th>Дата</th>
-            <!-- Добавьте другие колонки по необходимости -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="physicalParameters : ${userPhysicalParametersList}">
-            <td th:text="${physicalParameters.weight}"></td>
-            <td th:text="${physicalParameters.legGirth}"></td>
-            <td th:text="${physicalParameters.armCircumference}"></td>
-            <td th:text="${physicalParameters.hipCircumference}"></td>
-            <td th:text="${physicalParameters.waistCircumference}"></td>
-            <td th:text="${physicalParameters.chestCircumference}"></td>
-            <td th:text="${physicalParameters.date}"></td>
-            <!-- Добавьте другие ячейки по необходимости -->
-        </tr>
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
+            <thead>
+            <tr>
+                <th>Вес (кг)</th>
+                <th>Обхват ноги (см)</th>
+                <th>Обхват руки (см)</th>
+                <th>Обхват бедер (см)</th>
+                <th>Обхват талии (см)</th>
+                <th>Обхват грудной клетки (см)</th>
+                <th>Дата</th>
+                <!-- Добавьте другие колонки по необходимости -->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="physicalParameters : ${userPhysicalParametersList}">
+                <td th:text="${physicalParameters.weight}"></td>
+                <td th:text="${physicalParameters.legGirth}"></td>
+                <td th:text="${physicalParameters.armCircumference}"></td>
+                <td th:text="${physicalParameters.hipCircumference}"></td>
+                <td th:text="${physicalParameters.waistCircumference}"></td>
+                <td th:text="${physicalParameters.chestCircumference}"></td>
+                <td th:text="${physicalParameters.date}"></td>
+                <!-- Добавьте другие ячейки по необходимости -->
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <script>
     let condition = true;

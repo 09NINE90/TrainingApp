@@ -24,7 +24,4 @@ public class User {
     private String password;
     private String roles;
     private Long trainerId;
-
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<UserPhysicalParameters> userPhysicalParameters = new ArrayList<UserPhysicalParameters>();
 }

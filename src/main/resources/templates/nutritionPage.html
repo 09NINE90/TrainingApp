@@ -64,60 +64,64 @@
     <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
         <a th:href="@{'/api/v1/setNutritionPlan/' + ${userId}}" data-item='Добавить план питания'>Добавить план питания</a>
     </div>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
-        <thead>
-        <tr>
-            <th>Калорийность</th>
-            <th>Белки (г)</th>
-            <th>Жиры (г)</th>
-            <th>Углеводы (г)</th>
-            <th>Вес</th>
-            <th>Период</th>
-            <!--            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Удаление приема пищи</th>-->
-            <!-- Добавьте другие колонки по необходимости -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="nutrition : ${nutritionPlan}">
-            <td th:text="${nutrition.calories}"></td>
-            <td th:text="${nutrition.proteins}"></td>
-            <td th:text="${nutrition.fats}"></td>
-            <td th:text="${nutrition.carbohydrates}"></td>
-            <td th:text="${nutrition.weight}"></td>
-            <td th:text="${nutrition.duration}"></td>
-            <!--            <td th:text="${nutrition.date}"></td>-->
-            <!--            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteNutrition/' + ${nutrition.id}}">Удалить</a></td>-->
-            <!-- Добавьте другие ячейки по необходимости -->
-        </tr>
-        </tbody>
-    </table>
-    <table th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
-        <thead>
-        <tr>
-            <th>Калорийность</th>
-            <th>Белки (г)</th>
-            <th>Жиры (г)</th>
-            <th>Углеводы (г)</th>
-            <th>Вес</th>
-            <th>Период</th>
-            <th th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">Удаление плана</th>
-            <!-- Добавьте другие колонки по необходимости -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="nutritionPlan : ${nutritionPlanList}">
-            <td th:text="${nutritionPlan.calories}"></td>
-            <td th:text="${nutritionPlan.proteins}"></td>
-            <td th:text="${nutritionPlan.fats}"></td>
-            <td th:text="${nutritionPlan.carbohydrates}"></td>
-            <td th:text="${nutritionPlan.weight}"></td>
-            <td th:text="${nutritionPlan.duration}"></td>
-<!--            <td th:text="${nutrition.date}"></td>-->
-            <td th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}"><a th:href="@{'/api/v1/deleteNutritionPlan/' + ${nutritionPlan.id} + '/' + ${userId}}">Удалить</a></td>
-            <!-- Добавьте другие ячейки по необходимости -->
-        </tr>
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+            <thead>
+            <tr>
+                <th>Калорийность</th>
+                <th>Белки (г)</th>
+                <th>Жиры (г)</th>
+                <th>Углеводы (г)</th>
+                <th>Вес</th>
+                <th>Период</th>
+                <!--            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Удаление приема пищи</th>-->
+                <!-- Добавьте другие колонки по необходимости -->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="nutrition : ${nutritionPlan}">
+                <td th:text="${nutrition.calories}"></td>
+                <td th:text="${nutrition.proteins}"></td>
+                <td th:text="${nutrition.fats}"></td>
+                <td th:text="${nutrition.carbohydrates}"></td>
+                <td th:text="${nutrition.weight}"></td>
+                <td th:text="${nutrition.duration}"></td>
+                <!--            <td th:text="${nutrition.date}"></td>-->
+                <!--            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteNutrition/' + ${nutrition.id}}">Удалить</a></td>-->
+                <!-- Добавьте другие ячейки по необходимости -->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-container">
+        <table th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
+            <thead>
+            <tr>
+                <th>Калорийность</th>
+                <th>Белки (г)</th>
+                <th>Жиры (г)</th>
+                <th>Углеводы (г)</th>
+                <th>Вес</th>
+                <th>Период</th>
+                <th th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">Удаление плана</th>
+                <!-- Добавьте другие колонки по необходимости -->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="nutritionPlan : ${nutritionPlanList}">
+                <td th:text="${nutritionPlan.calories}"></td>
+                <td th:text="${nutritionPlan.proteins}"></td>
+                <td th:text="${nutritionPlan.fats}"></td>
+                <td th:text="${nutritionPlan.carbohydrates}"></td>
+                <td th:text="${nutritionPlan.weight}"></td>
+                <td th:text="${nutritionPlan.duration}"></td>
+    <!--            <td th:text="${nutrition.date}"></td>-->
+                <td th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}"><a th:href="@{'/api/v1/deleteNutritionPlan/' + ${nutritionPlan.id} + '/' + ${userId}}">Удалить</a></td>
+                <!-- Добавьте другие ячейки по необходимости -->
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="contact" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
         <p>РЕКОМЕНДАЦИИ</p>
         <p>Стоп продукты - Все продукты в которых есть транс жиры (маргарин, пальмовое, гидролизированное масло)</p>
@@ -164,34 +168,36 @@
         <p> - Жиры: <span th:text="${fats}"></span></p>
         <p> - Углеводы: <span th:text="${carbohydrates}"></span></p>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Название продукта</th>
-            <th>Вес (г)</th>
-            <th>Калорийность</th>
-            <th>Белки (г)</th>
-            <th>Жиры (г)</th>
-            <th>Углеводы (г)</th>
-            <th>Дата и время приема пищи</th>
-<!--            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Удаление приема пищи</th>-->
-            <!-- Добавьте другие колонки по необходимости -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="nutrition : ${nutritionList}">
-            <td th:text="${nutrition.food}"></td>
-            <td th:text="${nutrition.weight}"></td>
-            <td th:text="${nutrition.calories}"></td>
-            <td th:text="${nutrition.proteins}"></td>
-            <td th:text="${nutrition.fats}"></td>
-            <td th:text="${nutrition.carbohydrates}"></td>
-            <td th:text="${#dates.format(nutrition.date, 'dd/MM/yyyy HH:mm')}"></td>
-<!--            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteNutrition/' + ${nutrition.id}}">Удалить</a></td>-->
-            <!-- Добавьте другие ячейки по необходимости -->
-        </tr>
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Название продукта</th>
+                <th>Вес (г)</th>
+                <th>Калорийность</th>
+                <th>Белки (г)</th>
+                <th>Жиры (г)</th>
+                <th>Углеводы (г)</th>
+                <th>Дата и время приема пищи</th>
+    <!--            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Удаление приема пищи</th>-->
+                <!-- Добавьте другие колонки по необходимости -->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="nutrition : ${nutritionList}">
+                <td th:text="${nutrition.food}"></td>
+                <td th:text="${nutrition.weight}"></td>
+                <td th:text="${nutrition.calories}"></td>
+                <td th:text="${nutrition.proteins}"></td>
+                <td th:text="${nutrition.fats}"></td>
+                <td th:text="${nutrition.carbohydrates}"></td>
+                <td th:text="${#dates.format(nutrition.date, 'dd/MM/yyyy HH:mm')}"></td>
+    <!--            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteNutrition/' + ${nutrition.id}}">Удалить</a></td>-->
+                <!-- Добавьте другие ячейки по необходимости -->
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <script>
     let condition = true;

@@ -66,56 +66,58 @@
     <div class="add_btn" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">
         <a th:href="@{'/api/v1/getReportsForAdmin/' + ${userId}}" data-item='Посмотреть отчеты тренировок'>Посмотреть отчеты тренировок</a>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">Удаление тренировки</th>
-            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Отчет</th>
-            <th>Название тренировки</th>
-            <th>Упражнение</th>
-            <th>Повторения</th>
-
-            <!-- Добавьте другие колонки по необходимости -->
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="workoutPlan : ${workoutPlans}">
+    <div class="table-container">
+        <table>
+            <thead>
             <tr>
-                <td rowspan="6" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}"><a th:href="@{'/api/v1/deleteWorkoutPlan/' + ${workoutPlan.id} + '/' + ${userId}}">Удалить</a></td>
-                <td rowspan="6" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/createReport/' + ${workoutPlan.id}}">Сделать отчет</a></td>
-                <td th:text="${workoutPlan.dayOfWeek}" rowspan="6"></td>
-                <td th:text="${workoutPlan.exercises1}"></td>
-                <td th:text="${workoutPlan.repetitions1}"></td>
-            </tr>
-            <tr>
+                <th th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}">Удаление тренировки</th>
+                <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Отчет</th>
+                <th>Название тренировки</th>
+                <th>Упражнение</th>
+                <th>Повторения</th>
 
-                <td th:text="${workoutPlan.exercises2}"></td>
-                <td th:text="${workoutPlan.repetitions2}"></td>
+                <!-- Добавьте другие колонки по необходимости -->
             </tr>
-            <tr>
+            </thead>
+            <tbody>
+            <th:block th:each="workoutPlan : ${workoutPlans}">
+                <tr>
+                    <td rowspan="6" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}"><a th:href="@{'/api/v1/deleteWorkoutPlan/' + ${workoutPlan.id} + '/' + ${userId}}">Удалить</a></td>
+                    <td rowspan="6" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/createReport/' + ${workoutPlan.id}}">Сделать отчет</a></td>
+                    <td th:text="${workoutPlan.dayOfWeek}" rowspan="6"></td>
+                    <td th:text="${workoutPlan.exercises1}"></td>
+                    <td th:text="${workoutPlan.repetitions1}"></td>
+                </tr>
+                <tr>
 
-                <td th:text="${workoutPlan.exercises3}"></td>
-                <td th:text="${workoutPlan.repetitions3}"></td>
-            </tr>
-            <tr>
+                    <td th:text="${workoutPlan.exercises2}"></td>
+                    <td th:text="${workoutPlan.repetitions2}"></td>
+                </tr>
+                <tr>
 
-                <td th:text="${workoutPlan.exercises4}"></td>
-                <td th:text="${workoutPlan.repetitions4}"></td>
-            </tr>
-            <tr>
+                    <td th:text="${workoutPlan.exercises3}"></td>
+                    <td th:text="${workoutPlan.repetitions3}"></td>
+                </tr>
+                <tr>
 
-                <td th:text="${workoutPlan.exercises5}"></td>
-                <td th:text="${workoutPlan.repetitions5}"></td>
-            </tr>
-            <tr>
+                    <td th:text="${workoutPlan.exercises4}"></td>
+                    <td th:text="${workoutPlan.repetitions4}"></td>
+                </tr>
+                <tr>
 
-                <td th:text="${workoutPlan.exercises6}"></td>
-                <td th:text="${workoutPlan.repetitions6}"></td>
-            </tr>
+                    <td th:text="${workoutPlan.exercises5}"></td>
+                    <td th:text="${workoutPlan.repetitions5}"></td>
+                </tr>
+                <tr>
 
-        </th:block>
-        </tbody>
-    </table>
+                    <td th:text="${workoutPlan.exercises6}"></td>
+                    <td th:text="${workoutPlan.repetitions6}"></td>
+                </tr>
+
+            </th:block>
+            </tbody>
+        </table>
+    </div>
 </div>
 <script>
     let condition = true;
