@@ -14,23 +14,23 @@ import java.util.Optional;
 
 @Service
 public class WorkoutPlanServiceImpl implements WorkoutPlanService {
-    @Autowired
-    private WorkoutPlanRepository workoutPlanRepository;
+
     @Autowired
     private ReportOfWorkoutRepository reportOfWorkoutRepository;
-    @Override
-    public List<WorkoutPlan> getWorkoutPlansByUserId(Long userId) {
-        return workoutPlanRepository.getWorkoutPlansByUserId(userId);
-    }
+    @Autowired
+    private WorkoutPlanRepository workoutPlanRepository;
 
-    @Override
-    public void saveWorkoutPlan(WorkoutPlan plan) {
-        workoutPlanRepository.save(plan);
-    }
+
     @Transactional
     @Override
     public void deleteWorkoutPlanById(Long id) {
         workoutPlanRepository.deleteById(id);
+    }
+
+    @Transactional
+    @Override
+    public void updateReportOfWorkoutById(Long id, String exercises, String reports) {
+        reportOfWorkoutRepository.updateReportOfWorkoutById(id, exercises, reports);
     }
 
     @Override
@@ -48,5 +48,21 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
     public List<ReportOfWorkout> getReportOfWorkoutByUserId(Long userId) {
         return reportOfWorkoutRepository.findReportOfWorkoutByUserId(userId);
     }
+
+    @Override
+    public Optional<ReportOfWorkout> getReportOfWorkoutById(Long id) {
+        return reportOfWorkoutRepository.findById(id);
+    }
+
+    @Override
+    public void saveWorkoutPlan2(WorkoutPlan workoutPlan) {
+        workoutPlanRepository.save(workoutPlan);
+    }
+
+    @Override
+    public List<WorkoutPlan> getWorkoutPlans2ByUserId(Long userId) {
+        return workoutPlanRepository.getWorkoutPlans2ByUserId(userId);
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.example.security20.config;
 
 import com.example.security20.service.UserService;
 import com.example.security20.service.impl.SecurityService;
+import ognl.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.ExceptionTranslationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import java.util.Collections;
 
@@ -42,12 +48,11 @@ public class SecurityConfig {
                 .csrf(Customizer.withDefaults())
                 .authorizeHttpRequests(request->
                         request.requestMatchers("/user/create","/login","/css/**",
-                                        "/js/**","/images/**").permitAll()
+                                        "/js/**","/images/**", "/submitForm").permitAll()
                                 .anyRequest().authenticated())
                 .formLogin(form-> form.loginPage("/login")
                         .defaultSuccessUrl("/api/v1/home",true))
                 .build();
-
     }
     @Bean
     public AuthenticationProvider authenticationProvider() {

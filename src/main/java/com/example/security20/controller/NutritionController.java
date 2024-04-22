@@ -76,11 +76,11 @@ public class NutritionController {
         Date endOfWeekDate = dateList.get(1);
         Date myDate = dateList.get(2);
         String checkDays = myDate.toString().split(" ")[2];
-        double weightFactor = nutrition.getWeight() / 100.0;
-        double calories =  Math.ceil(nutrition.getCalories() * weightFactor * 10) /10;
-        double proteins =  Math.ceil(nutrition.getProteins() * weightFactor * 10) /10;
-        double fats = Math.ceil(nutrition.getFats() * weightFactor * 10) /10;
-        double carbohydrates =  Math.ceil(nutrition.getCarbohydrates() * weightFactor * 10) /10;
+//        double weightFactor = nutrition.getWeight() / 100.0;
+        double calories =  Math.ceil(nutrition.getCalories() * 10) /10;
+        double proteins =  Math.ceil(nutrition.getProteins() * 10) /10;
+        double fats = Math.ceil(nutrition.getFats() * 10) /10;
+        double carbohydrates =  Math.ceil(nutrition.getCarbohydrates() * 10) /10;
 
         WeekNutrition weekNutrition;
         WeekNutrition lastWeekNutrition = nutritionService.findLastWeekNutritionByUserIdAndWeekStart(userId, startOfWeekDate);

@@ -38,7 +38,7 @@
 <!--                <a href="/user/create">create</a>-->
                 <div class="inputBox">
 
-                    <input type="submit" value="войти">
+                    <input id = "entry-btn" type="submit" value="войти">
 
                 </div>
 
@@ -49,7 +49,39 @@
     </div>
 
 </section> <!-- partial -->
+<script type="text/javascript">
+    const submitBtn = document.getElementById('entry-btn');
 
+    // submitBtn.addEventListener("click", function(){
+    //     let element = document.querySelector('input[name="_csrf"]');
+    //
+    //     // Получаем значение атрибута value
+    //     let csrfValue = element.getAttribute('value');
+    //
+    //     // Выводим значение в консоль
+    //     console.log(csrfValue);
+    //     document.cookie = "token=" + csrfValue
+    //     // submitForm(csrfValue)
+    //     console.log(document.cookie);
+    //
+    // })
+    // function submitForm(formData) {
+    //     $.ajax({
+    //         type: "POST",
+    //         contentType: "application/json",
+    //         url: "/api/v1/submitForm",
+    //         data: JSON.stringify(formData),
+    //         headers: formData,
+    //         success: function (response) {
+    //             console.log(JSON.stringify(formData))
+    //             console.log("Form data submitted successfully");
+    //         },
+    //         error: function (error) {
+    //             console.error("Error submitting form data");
+    //         }
+    //     });
+    // }
+</script>
 </body>
 
 </html>

@@ -75,46 +75,25 @@
                 <th>Название тренировки</th>
                 <th>Упражнение</th>
                 <th>Повторения</th>
-
-                <!-- Добавьте другие колонки по необходимости -->
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="workoutPlan : ${workoutPlans}">
-                <tr>
-                    <td rowspan="6" th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}"><a th:href="@{'/api/v1/deleteWorkoutPlan/' + ${workoutPlan.id} + '/' + ${userId}}">Удалить</a></td>
-                    <td rowspan="6" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/createReport/' + ${workoutPlan.id}}">Сделать отчет</a></td>
-                    <td th:text="${workoutPlan.dayOfWeek}" rowspan="6"></td>
-                    <td th:text="${workoutPlan.exercises1}"></td>
-                    <td th:text="${workoutPlan.repetitions1}"></td>
-                </tr>
-                <tr>
+            <tr th:each="data : ${workoutPlans2}">
+                <td  th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}"><a th:href="@{'/api/v1/deleteWorkoutPlan/' + ${data.id} + '/' + ${userId}}">Удалить</a></td>
+                <td  th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/createReport/' + ${data.id}}">Сделать отчет</a></td>
+                <td th:text="${data.dayOfWeek}"></td>
+                <td>
+                    <ul>
+                        <li th:each="exercise : ${data.exercises}" th:text="${exercise}"></li>
+                    </ul>
+                </td>
 
-                    <td th:text="${workoutPlan.exercises2}"></td>
-                    <td th:text="${workoutPlan.repetitions2}"></td>
-                </tr>
-                <tr>
-
-                    <td th:text="${workoutPlan.exercises3}"></td>
-                    <td th:text="${workoutPlan.repetitions3}"></td>
-                </tr>
-                <tr>
-
-                    <td th:text="${workoutPlan.exercises4}"></td>
-                    <td th:text="${workoutPlan.repetitions4}"></td>
-                </tr>
-                <tr>
-
-                    <td th:text="${workoutPlan.exercises5}"></td>
-                    <td th:text="${workoutPlan.repetitions5}"></td>
-                </tr>
-                <tr>
-
-                    <td th:text="${workoutPlan.exercises6}"></td>
-                    <td th:text="${workoutPlan.repetitions6}"></td>
-                </tr>
-
-            </th:block>
+                <td>
+                    <ul>
+                        <li th:each="repetition : ${data.repetitions}" th:text="${repetition}"></li>
+                    </ul>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

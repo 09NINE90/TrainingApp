@@ -135,6 +135,7 @@ section .signin .content .form .inputBox i
     font-size: 0.8em;
     color: #fff;
 }
+
 .signin .content .form .links
 {
     position: relative;
@@ -191,12 +192,18 @@ input[type="submit"]:active
 /*==========================================================================*/
 /*==========================================================================*/
 section .report{
-    width: 650px;
+    width: 80vh;
+}
+
+section .report .content{
+    max-height: 80vh;
+    overflow-y: auto;
+    width: 90%;
 }
 section .workout
 {
     position: absolute;
-    width: 900px;
+    width: 80vh;
     background: #222;
     z-index: 1000;
     display: flex;
@@ -208,8 +215,10 @@ section .workout
 }
 section .workout .content
 {
+    max-height: 80vh; /* Максимальная высота контейнера формы */
+    overflow-y: auto;
     position: relative;
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -328,4 +337,47 @@ input[type="submit"]:active
     justify-content: space-between;
 }
 
+@media (max-width: 768px) {
+    section .workout
+    {
+        width: 95%;
+    }
+    section .workout .content {
+        width: 100%;
+    }
+    section .workout .content .form .inputBox input
+    {
+        font-size: 14px;
+    }
+    section .workout .content .form .inputBox i
+    {
+        font-size: 14px;
+    }
+    .workout .content .form .inputBox input[type="submit"]
+    {
+        font-size: 14px;
+    }
 
+    section .report
+    {
+        width: 95%;
+    }
+    section .report .content {
+        width: 100%;
+    }
+    section .report .content h2{
+        font-size: 28px;
+    }
+    section .report .content .form .inputBox input
+    {
+        font-size: 14px;
+    }
+    section .report .content .form .inputBox i
+    {
+        font-size: 14px;
+    }
+    .report .content .form .inputBox input[type="submit"]
+    {
+        font-size: 14px;
+    }
+}

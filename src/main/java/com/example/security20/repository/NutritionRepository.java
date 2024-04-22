@@ -1,7 +1,6 @@
 package com.example.security20.repository;
 
 import com.example.security20.entity.Nutrition;
-import com.example.security20.entity.WorkoutPlan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

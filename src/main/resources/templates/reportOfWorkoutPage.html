@@ -65,48 +65,28 @@
             <thead>
             <tr>
                 <th>Дата тренировки</th>
-                <th>Упражнение</th>
-                <th>Повторения</th>
+                <th>Упражнения</th>
                 <th>Отчет</th>
+                <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Редактировать отчет</th>
                 <!-- Добавьте другие колонки по необходимости -->
             </tr>
             </thead>
             <tbody>
-                <th:block th:each="reportOfWorkout : ${reportOfWorkoutList}">
-                    <tr>
-                        <td th:text="${#dates.format(reportOfWorkout.date, 'dd/MM/yyyy')}" rowspan="6"></td>
-                        <td th:text="${reportOfWorkout.exercises1}"></td>
-                        <td th:text="${reportOfWorkout.repetitions1Plan}"></td>
-                        <td th:text="${reportOfWorkout.repetitions1}"></td>
-                    </tr>
-                    <tr>
-                        <td th:text="${reportOfWorkout.exercises2}"></td>
-                        <td th:text="${reportOfWorkout.repetitions2Plan}"></td>
-                        <td th:text="${reportOfWorkout.repetitions2}"></td>
-                    </tr>
-                    <tr>
-                        <td th:text="${reportOfWorkout.exercises3}"></td>
-                        <td th:text="${reportOfWorkout.repetitions3Plan}"></td>
-                        <td th:text="${reportOfWorkout.repetitions3}"></td>
-                    </tr>
-                    <tr>
-                        <td th:text="${reportOfWorkout.exercises4}"></td>
-                        <td th:text="${reportOfWorkout.repetitions4Plan}"></td>
-                        <td th:text="${reportOfWorkout.repetitions4}"></td>
-                    </tr>
-                    <tr>
+                <tr th:each="reportOfWorkout : ${reportOfWorkoutList}">
+                    <td th:text="${#dates.format(reportOfWorkout.date, 'dd/MM/yyyy')}" ></td>
+                    <td>
+                        <ul>
+                            <li th:each="exercise : ${reportOfWorkout.exercises}" th:text="${exercise}"></li>
+                        </ul>
+                    </td>
 
-                        <td th:text="${reportOfWorkout.exercises5}"></td>
-                        <td th:text="${reportOfWorkout.repetitions5Plan}"></td>
-                        <td th:text="${reportOfWorkout.repetitions5}"></td>
-                    </tr>
-                    <tr>
-                        <td th:text="${reportOfWorkout.exercises6}"></td>
-                        <td th:text="${reportOfWorkout.repetitions6Plan}"></td>
-                        <td th:text="${reportOfWorkout.repetitions6}"></td>
-                    </tr>
-
-                </th:block>
+                    <td>
+                        <ul>
+                            <li th:each="report : ${reportOfWorkout.reports}" th:text="${report}"></li>
+                        </ul>
+                    </td>
+                    <td  th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/edit/' + ${reportOfWorkout.id}}">Редактировать</a></td>
+                </tr>
             </tbody>
         </table>
     </div>
