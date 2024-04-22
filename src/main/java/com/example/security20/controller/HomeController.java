@@ -4,15 +4,11 @@ import com.example.security20.dto.CustomUserDetails;
 import com.example.security20.dto.UserDTO;
 import com.example.security20.entity.User;
 import com.example.security20.entity.UserPhysicalParameters;
-import com.example.security20.entity.WorkoutPlan;
 import com.example.security20.repository.UserPhysicalParametersRepository;
-import com.example.security20.repository.UserRepository;
-import com.example.security20.repository.WorkoutPlanRepository;
 import com.example.security20.service.UserService;
 
 import com.example.security20.service.WorkoutPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +25,7 @@ public class HomeController {
     private UserPhysicalParametersRepository userPhysicalParametersRepository;
     @Autowired
     WorkoutPlanService workoutPlanService;
-    @Autowired
-    private WorkoutPlanRepository workoutPlanRepository;
+
 
     @GetMapping("/home")
     public String getUserProfile(Authentication authentication, Model model) {

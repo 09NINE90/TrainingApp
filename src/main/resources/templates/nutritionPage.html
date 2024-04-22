@@ -129,30 +129,31 @@
         <p>Вода в день не менее 2,5 л. - 3 л. - 50 % чистая вода</p>
         <p>Все спортивное питание так же учитывается в КАЛОРИЙНОСТИ ДНЯ!</p>
         <p>В БЖУ учитываем ВСЕ - кроме зеленых овощей и клетчатки</p>
-        <p>Каждый день все забиваем в эту форму</p>
+        <p>Каждый день все забиваем вcе приемы пищи в программу Fat Secret</p>
+        <p>Потом КБЖУ за весь день вносим в эту форму (один день - одна запись)</p>
     </div>
     <form class="form" th:action="@{/api/v1/addNutrition}"  th:object="${nutrition}" method="post" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
 
+<!--        <div class="inputBox">-->
+<!--            <input type="text" th:field="*{food}"  name="food" placeholder="Название продукта" required>-->
+<!--        </div>-->
+<!--        <div class="inputBox">-->
+<!--            <input type="number" step="0.01" th:field="*{weight}" name="weight" placeholder="Вес (г)" required>-->
+<!--        </div>-->
         <div class="inputBox">
-            <input type="text" th:field="*{food}"  name="food" placeholder="Название продукта" required>
+            <input type="number" step="0.01" th:field="*{calories}" name="calories" placeholder="Калории" required>
         </div>
         <div class="inputBox">
-            <input type="number" step="0.01" th:field="*{weight}" name="weight" placeholder="Вес (г)" required>
+            <input type="number" step="0.01" th:field="*{proteins}" name="proteins" placeholder="Белки" required>
         </div>
         <div class="inputBox">
-            <input type="number" step="0.01" th:field="*{calories}" name="calories" placeholder="Калорийность (на 100 г продукта)" required>
+            <input type="number" step="0.01" th:field="*{fats}" name="fats" placeholder="Жиры" required>
         </div>
         <div class="inputBox">
-            <input type="number" step="0.01" th:field="*{proteins}" name="proteins" placeholder="Белки (г/100 г продукта)" required>
+            <input type="number" step="0.01" th:field="*{carbohydrates}" name="carbohydrates" placeholder="Углеводы" required>
         </div>
         <div class="inputBox">
-            <input type="number" step="0.01" th:field="*{fats}" name="fats" placeholder="Жиры (г/100 г продукта)" required>
-        </div>
-        <div class="inputBox">
-            <input type="number" step="0.01" th:field="*{carbohydrates}" name="carbohydrates" placeholder="Углеводы (г/100 г продукта)" required>
-        </div>
-        <div class="inputBox">
-            <input type="datetime-local" th:field="*{date}" name="date" required>
+            <input type="date" th:field="*{date}" name="date" required>
         </div>
         <div class="inputBox">
 
@@ -172,26 +173,26 @@
         <table>
             <thead>
             <tr>
-                <th>Название продукта</th>
-                <th>Вес (г)</th>
-                <th>Калорийность</th>
+<!--                <th>Название продукта</th>-->
+<!--                <th>Вес (г)</th>-->
+                <th>Калории</th>
                 <th>Белки (г)</th>
                 <th>Жиры (г)</th>
                 <th>Углеводы (г)</th>
-                <th>Дата и время приема пищи</th>
+                <th>Дата приема пищи</th>
     <!--            <th th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Удаление приема пищи</th>-->
                 <!-- Добавьте другие колонки по необходимости -->
             </tr>
             </thead>
             <tbody>
             <tr th:each="nutrition : ${nutritionList}">
-                <td th:text="${nutrition.food}"></td>
-                <td th:text="${nutrition.weight}"></td>
+<!--                <td th:text="${nutrition.food}"></td>-->
+<!--                <td th:text="${nutrition.weight}"></td>-->
                 <td th:text="${nutrition.calories}"></td>
                 <td th:text="${nutrition.proteins}"></td>
                 <td th:text="${nutrition.fats}"></td>
                 <td th:text="${nutrition.carbohydrates}"></td>
-                <td th:text="${#dates.format(nutrition.date, 'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${#dates.format(nutrition.date, 'dd/MM/yyyy')}"></td>
     <!--            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/deleteNutrition/' + ${nutrition.id}}">Удалить</a></td>-->
                 <!-- Добавьте другие ячейки по необходимости -->
             </tr>

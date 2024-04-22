@@ -17,14 +17,14 @@ public class Nutrition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String food; // название продукта
-    private Double weight; // граммовка
+//    private String food; // название продукта
+//    private Double weight; // граммовка
     private Double calories; // калории
     private Double proteins; // белки
     private Double fats; // жиры
     private Double carbohydrates; // углеводы
     @Column(columnDefinition = "TIMESTAMP")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date; // дата и время приема пищи
     private Long weekId;
     private Long userId;

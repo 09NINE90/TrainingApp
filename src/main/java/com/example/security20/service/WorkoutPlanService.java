@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface WorkoutPlanService {
-    List<WorkoutPlan> getWorkoutPlansByUserId(Long userId);
-    void saveWorkoutPlan(WorkoutPlan plan);
-
-    void deleteWorkoutPlanById(Long id);
 
     Optional<WorkoutPlan> findWorkoutPlanById(Long id);
-
     void saveReport(ReportOfWorkout reportOfWorkout);
-
     List<ReportOfWorkout> getReportOfWorkoutByUserId(Long userId);
+    Optional<ReportOfWorkout> getReportOfWorkoutById(Long id);
+    void saveWorkoutPlan2(WorkoutPlan workoutPlan);
+    List<WorkoutPlan> getWorkoutPlans2ByUserId(Long userId);
+    void deleteWorkoutPlanById(Long id);
+
+    void updateReportOfWorkoutById(Long id, String exercises, String reports);
 }

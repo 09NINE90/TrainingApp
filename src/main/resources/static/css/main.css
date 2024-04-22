@@ -127,6 +127,16 @@ table{
     width: 100%;
 }
 
+li{
+    list-style-type: none;
+    border-bottom: 1px solid white; /* Линия между элементами */
+    padding-bottom: 5px;
+}
+li:last-child {
+    border-bottom: none; /* Убираем линию после последнего элемента */
+    padding-bottom: 0; /* Убираем отступ после последнего элемента */
+}
+
 th {
     font-size: 13px;
     font-weight: normal;
@@ -196,72 +206,6 @@ input[type="submit"]:active
 {
     opacity: 0.6;
 }
-/* @media (max-width: 900px)
-{
-    section span
-    {
-        width: calc(10vw - 2px);
-        height: calc(10vw - 2px);
-    }
-}
-@media (max-width: 600px)
-{
-    section span
-    {
-        width: calc(20vw - 2px);
-        height: calc(20vw - 2px);
-    }
-}
-
-/* Стили для мобильных устройств */
-/* @media only screen and (max-width: 600px) {
-    .nav {
-        display: block;
-        text-align: center;
-    }
-
-    .menuItems {
-        flex-direction: column;
-    }
-
-    .menuItems li {
-        margin-bottom: 10px;
-    }
-
-    .profile {
-        width: 100%;
-    }
-
-    .contact {
-        padding: 5px;
-    }
-
-    table {
-        font-size: 12px;
-    }
-
-    .add_btn {
-        text-align: left;
-    }
-}
-@media only screen and (max-width: 600px) {
-    .profile {
-        width: 100%;
-    }
-
-    .contact {
-        padding: 5px;
-    }
-
-    table {
-        font-size: 12px;
-    }
-
-    .add_btn {
-        text-align: left;
-    }
-}  */
-
 
 
 body {

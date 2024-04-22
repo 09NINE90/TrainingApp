@@ -1,114 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Форма для плана тренировок</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <meta th:name="_csrf" th:content="${_csrf.token}"/>
     <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
-
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" th:href="@{/css/logintest.css}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
-    <p style="display: none" >id: <span id="user-id" th:text="${userId}"></span></p>
-    <div class="workout">
+
+    <div class="signin report">
+        <span id="id-report-plan" th:text="${reportOfWorkoutId}" style="display: none"></span>
         <div class="content">
-            <h2>Тренировка</h2>
-            <form class="form" id="dynamic-form" method="post">
-                <div class="form-group">
-                    <div class="inputBox">
-                        <input type="text" id = "dayOfWeek" name="dayOfWeek" ><i>Название тренировки</i>
-                    </div>
-                    <div class="inputBox">
-                        <input type="text"  id = "exercises1" name="exercises1" ><i>Упражнение 1</i>
-                    </div>
-                    <div class="inputBox">
-                        <input type="text"  id = "repetitions1" name="repetitions1" ><i>Повторения</i>
-                    </div>
-                </div>
-                <div class="inputBox" id = "add-btn">
-                    <input type="submit" value="добавить упражнение">
-                </div>
-                <div class="inputBox" id = "submit-btn">
-                    <input type="submit" value="добавить тренировку">
+
+            <h2>Отчет о тренировке</h2>
+            <form id="report-from" class="form" method="post">
+
+                <div class="inputBox" id="save-btn">
+
+                    <input  type="submit" value="сохранить отчет">
+
                 </div>
             </form>
         </div>
     </div>
 </section>
+
 <script type="text/javascript">
-    const form = document.getElementById('dynamic-form');
-    const addInputBtn = document.getElementById('add-btn');
-    const submitBtn = document.getElementById('submit-btn');
-    let counter = 1;
-    let userIdElement = document.getElementById('user-id');
-    let userId = userIdElement.textContent;
+    let id = document.getElementById('id-report-plan').textContent
+    let saveButton = document.getElementById('save-btn')
+    let form = document.getElementById('report-from');
+    // let dateForm = document.getElementById('date')
+    let previousInput = null;
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/getReport/' + id)
+            .then(response => response.json())
+            .then(data => {
+                // dateForm.value = data.date;
+                data.exercises.forEach((exercise, index) => {
+                    // Создаем новый элемент input
+                    let input = document.createElement('input');
+                    let div = document.createElement('div');
+                    let i = document.createElement('i');
+                    div.className = 'inputBox'
+                    // Устанавливаем тип и значение для input
+                    input.type = 'text';
+                    input.name = 'exercise' + index
+                    input.value = data.reports[index]
 
-    addInputBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-        counter++;
+                    i.textContent = exercise
 
-        const newFormGroup = document.createElement('div');
-        newFormGroup.className = 'inputBox';
-        newFormGroup.classList.add('form-group');
+                    div.appendChild(input)
+                    div.appendChild(i)
 
-        const newInput1 = document.createElement('input');
-        newInput1.type = 'text';
-        newInput1.name = "exercises" + counter;
-        newInput1.id = "exercises" + counter;
-        newInput1.required = true;
-        newFormGroup.appendChild(newInput1);
+                    form.insertBefore(div, saveButton);
 
-        const newI1 = document.createElement('i');
-        newI1.textContent = 'Упражнение ' + counter;
-        newFormGroup.appendChild(newI1);
-
-        const newInput2 = document.createElement('input');
-        newInput2.type = 'text';
-        newInput2.name = "repetitions" + counter;
-        newInput2.id = "repetitions" + counter;
-        newInput2.required = true;
-        newFormGroup.appendChild(newInput2);
-
-        const newI2 = document.createElement('i');
-        newI2.textContent = 'Повторения';
-        newFormGroup.appendChild(newI2);
-
-        form.insertBefore(newFormGroup, addInputBtn);
-
+                    if (previousInput) {
+                        previousInput.focus();
+                    }
+                    previousInput = input;
+                });
+            })
+            .catch(error => console.error('Error:', error));
     });
-    submitBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-
+    saveButton.addEventListener('click', function() {
         const formData = {};
         const inputs = document.querySelectorAll('.form input');
+        const i = document.querySelectorAll('.form i')
 
-        // Создаем списки для упражнений и повторений
-        const exercisesList = [];
-        const repetitionsList = [];
-
+        let exercisesList = [];
+        let reportsList = [];
+        i.forEach(function(ii) {
+            if (ii.textContent !== 'Дата'){
+                exercisesList.push(ii.textContent);
+            }
+        });
         inputs.forEach(function(input) {
             // Проверяем имя input и добавляем данные в соответствующий список
-            if (input.name.includes('exercises')) {
-                exercisesList.push(input.value);
-            } else if (input.name.includes('repetitions')) {
-                repetitionsList.push(input.value);
-            } else if (input.type !== 'submit') {
+            if (input.name.includes('exercise')) {
+                reportsList.push(input.value);
+            } else if (input.name.includes('date')) {
                 formData[input.name] = input.value;
             }
         });
         formData['exercises'] = exercisesList;
-        formData['repetitions'] = repetitionsList;
-        formData['userId'] = userId;
+        formData['reports'] = reportsList;
+        console.log(JSON.stringify(formData))
+
         const token = $("meta[name='_csrf']").attr("content");
         const header = $("meta[name='_csrf_header']").attr("content");
-        fetch('/submitForm', {
+        fetch('/submitReportForm/'+id, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -118,15 +105,12 @@
         })
             .then(response => {
                 console.log(response)
-                window.location.href = '/api/v1/getWorkoutPage/' + userId
+                window.location.href = '/api/v1/getReports'
             })
             .catch(error => {
                 console.error('Ошибка при отправке формы:', error);
             });
-
-    });
-
+    })
 </script>
 </body>
-
 </html>

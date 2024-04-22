@@ -71,7 +71,7 @@
                 <td th:text="${physicalParameters.hipCircumference}"></td>
                 <td th:text="${physicalParameters.waistCircumference}"></td>
                 <td th:text="${physicalParameters.chestCircumference}"></td>
-                <td th:text="${physicalParameters.date}"></td>
+                <td th:text="${#dates.format(physicalParameters.date, 'dd/MM/yyyy')}"></td>
                 <!-- Добавьте другие ячейки по необходимости -->
             </tr>
             </tbody>

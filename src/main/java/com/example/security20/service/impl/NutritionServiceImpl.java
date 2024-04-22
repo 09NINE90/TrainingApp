@@ -33,29 +33,6 @@ public class NutritionServiceImpl implements NutritionService {
         return nutritionRepository.getNutritionByUserId(userId);
     }
 
-//    @Transactional
-//    @Override
-//    public void deleteById(Long id) {
-//        Optional<Nutrition> nutritionOptional = nutritionRepository.findById(id);
-//        Nutrition nutrition = nutritionOptional.get();
-//        Optional<WeekNutrition> weekNutritionOptional = weekNutritionRepository.findById(nutrition.getWeekId());
-//        WeekNutrition weekNutrition = weekNutritionOptional.get();
-//        double calories = weekNutrition.getSumCalories() - nutrition.getCalories();
-//        double proteins = weekNutrition.getSumProteins() - nutrition.getProteins();
-//        double fats = weekNutrition.getSumFats() - nutrition.getFats();
-//        double carbs = weekNutrition.getSumCarbohydrates() - nutrition.getCarbohydrates();
-//
-//        updateWeekNutrition(weekNutrition.getUserId(),
-//                            weekNutrition.getNumDayOfWeek(),
-//                            weekNutrition.getNumOfWeek(),
-//                            weekNutrition.getCountDaysOfWeek(),
-//                            calories,
-//                            proteins,
-//                            fats,
-//                            carbs);
-//        nutritionRepository.deleteById(id);
-//    }
-
     @Transactional
     @Override
     public void deletePlanById(Long id) {

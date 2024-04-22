@@ -34,10 +34,6 @@ public class UserController {
     @Autowired
     private UserPhysicalParametersRepository userPhysicalParametersRepository;
     @Autowired
-    private WorkoutPlanService workoutPlanService;
-    @Autowired
-    private NutritionService nutritionService;
-    @Autowired
     MailService mailService;
 
     @GetMapping("/logout")
@@ -50,10 +46,6 @@ public class UserController {
         Optional<User> userOptional = userService.getUserById(id);
         User user = userOptional.get();
         List<UserPhysicalParameters> userPhysicalParametersList = userPhysicalParametersRepository.findPhysicalParametersByUserId(user.getId());
-//        List<WorkoutPlan> workoutPlans = workoutPlanService.getWorkoutPlansByUserId(id);
-//        List<Nutrition> nutritionList = nutritionService.getNutritionByUserId(id);
-//        model.addAttribute("nutritionList", nutritionList);
-//        model.addAttribute("workoutPlans", workoutPlans);
         model.addAttribute("user", user);
         model.addAttribute("userPhysicalParametersList", userPhysicalParametersList);
         return "userPage";
