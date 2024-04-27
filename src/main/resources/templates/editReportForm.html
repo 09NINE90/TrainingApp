@@ -20,7 +20,7 @@
         <div class="content">
 
             <h2>Отчет о тренировке</h2>
-            <form id="report-from" class="form" method="post">
+            <form id="report-from" th:action="@{/api/v1/getReports}" class="form" method="get">
 
                 <div class="inputBox" id="save-btn">
 
@@ -36,13 +36,11 @@
     let id = document.getElementById('id-report-plan').textContent
     let saveButton = document.getElementById('save-btn')
     let form = document.getElementById('report-from');
-    // let dateForm = document.getElementById('date')
     let previousInput = null;
     document.addEventListener('DOMContentLoaded', function() {
         fetch('/getReport/' + id)
             .then(response => response.json())
             .then(data => {
-                // dateForm.value = data.date;
                 data.exercises.forEach((exercise, index) => {
                     // Создаем новый элемент input
                     let input = document.createElement('input');
@@ -94,7 +92,7 @@
         console.log(JSON.stringify(formData))
 
         const token = $("meta[name='_csrf']").attr("content");
-        const header = $("meta[name='_csrf_header']").attr("content");
+        // const header = $("meta[name='_csrf_header']").attr("content");
         fetch('/submitReportForm/'+id, {
             method: 'POST',
             headers: {
@@ -105,7 +103,6 @@
         })
             .then(response => {
                 console.log(response)
-                window.location.href = '/api/v1/getReports'
             })
             .catch(error => {
                 console.error('Ошибка при отправке формы:', error);

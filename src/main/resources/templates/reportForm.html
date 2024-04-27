@@ -20,8 +20,7 @@
         <div class="content">
 
             <h2>Отчет о тренировке</h2>
-            <form id="report-from" class="form" method="post">
-
+            <form id="report-from" th:action="@{/api/v1/getReports}" class="form" method="get">
                 <div class="inputBox">
                     <input type="date"  name="date" required><i>Дата</i>
                 </div>
@@ -37,6 +36,9 @@
 </section>
 
 <script type="text/javascript">
+    const token = $("meta[name='_csrf']").attr("content");
+    const header = $("meta[name='_csrf_header']").attr("content");
+    console.log(token)
     let id = document.getElementById('id-workout-plan').textContent
     let addButton = document.getElementById('add-dtn')
     let form = document.getElementById('report-from');
@@ -57,7 +59,7 @@
                     input.name = 'exercise' + index
 
                     i.textContent = exercise
-
+                    let userId = data.userId
                     div.appendChild(input)
                     div.appendChild(i)
 
@@ -98,10 +100,9 @@
         });
         formData['exercises'] = exercisesList;
         formData['reports'] = reportsList;
-        console.log(JSON.stringify(formData))
 
         const token = $("meta[name='_csrf']").attr("content");
-        const header = $("meta[name='_csrf_header']").attr("content");
+        // const header = $("meta[name='_csrf_header']").attr("content");
         fetch('/submitReportForm', {
             method: 'POST',
             headers: {
@@ -112,12 +113,11 @@
         })
             .then(response => {
                 console.log(response)
-                window.location.href = '/api/v1/getReports'
             })
             .catch(error => {
                 console.error('Ошибка при отправке формы:', error);
             });
-    })
+    });
 </script>
 </body>
 </html>

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тренрировки</title>
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" th:href="@{/css/main.css}">
     <link
             rel="stylesheet"
@@ -81,8 +83,9 @@
             <tr th:each="data : ${workoutPlans2}">
                 <td  th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}"><a th:href="@{'/api/v1/deleteWorkoutPlan/' + ${data.id} + '/' + ${userId}}">Удалить</a></td>
                 <td  th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/createReport/' + ${data.id}}">Сделать отчет</a></td>
+
                 <td th:text="${data.dayOfWeek}"></td>
-                <td>
+                <td class="column-with">
                     <ul>
                         <li th:each="exercise : ${data.exercises}" th:text="${exercise}"></li>
                     </ul>
@@ -100,7 +103,9 @@
 </div>
 <script>
     let condition = true;
-
+    const token = $("meta[name='_csrf']").attr("content");
+    const header = $("meta[name='_csrf_header']").attr("content");
+    console.log(token)
     function forward() {
         anime({
             targets: '.menu-small',

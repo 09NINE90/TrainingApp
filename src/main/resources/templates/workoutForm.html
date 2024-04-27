@@ -107,7 +107,8 @@
         formData['repetitions'] = repetitionsList;
         formData['userId'] = userId;
         const token = $("meta[name='_csrf']").attr("content");
-        const header = $("meta[name='_csrf_header']").attr("content");
+        // const header = $("meta[name='_csrf_header']").attr("content");
+
         fetch('/submitForm', {
             method: 'POST',
             headers: {

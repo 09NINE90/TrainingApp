@@ -61,9 +61,10 @@ public class workoutPlanController {
     }
 
     @GetMapping("/getReports")
-    public String getReports(Authentication authentication, Model model){
+    public String getReports(Authentication authentication, Model model) throws InterruptedException {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         Long userId = userDetails.getId();
+        Thread.sleep(300);
         List<ReportOfWorkout> reportOfWorkoutList = workoutPlanService.getReportOfWorkoutByUserId(userId);
         List<FormReport> formReportList = getFormReports(reportOfWorkoutList);
         model.addAttribute("reportOfWorkoutList", formReportList);
