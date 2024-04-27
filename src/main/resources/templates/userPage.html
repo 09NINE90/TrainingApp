@@ -65,13 +65,13 @@
             </thead>
             <tbody>
             <tr th:each="physicalParameters : ${userPhysicalParametersList}">
-                <td th:text="${physicalParameters.weight}"></td>
-                <td th:text="${physicalParameters.legGirth}"></td>
-                <td th:text="${physicalParameters.armCircumference}"></td>
-                <td th:text="${physicalParameters.hipCircumference}"></td>
-                <td th:text="${physicalParameters.waistCircumference}"></td>
-                <td th:text="${physicalParameters.chestCircumference}"></td>
-                <td th:text="${#dates.format(physicalParameters.date, 'dd/MM/yyyy')}"></td>
+                <td class="column-with" th:text="${physicalParameters.weight}"></td>
+                <td class="column-with" th:text="${physicalParameters.legGirth}"></td>
+                <td class="column-with" th:text="${physicalParameters.armCircumference}"></td>
+                <td class="column-with" th:text="${physicalParameters.hipCircumference}"></td>
+                <td class="column-with" th:text="${physicalParameters.waistCircumference}"></td>
+                <td class="column-with" th:text="${physicalParameters.chestCircumference}"></td>
+                <td class="column-with" th:text="${#dates.format(physicalParameters.date, 'dd/MM/yyyy')}"></td>
                 <!-- Добавьте другие ячейки по необходимости -->
             </tr>
             </tbody>

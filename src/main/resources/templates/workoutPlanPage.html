@@ -82,10 +82,10 @@
             <tbody>
             <tr th:each="data : ${workoutPlans2}">
                 <td  th:if="${#authorization.expression('hasRole(''ROLE_COACH'')')}"><a th:href="@{'/api/v1/deleteWorkoutPlan/' + ${data.id} + '/' + ${userId}}">Удалить</a></td>
-                <td  th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/createReport/' + ${data.id}}">Сделать отчет</a></td>
+                <td  class="column-with" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><a th:href="@{'/api/v1/createReport/' + ${data.id}}">Сделать отчет</a></td>
 
-                <td th:text="${data.dayOfWeek}"></td>
-                <td class="column-with">
+                <td class="column-with" th:text="${data.dayOfWeek}"></td>
+                <td>
                     <ul>
                         <li th:each="exercise : ${data.exercises}" th:text="${exercise}"></li>
                     </ul>

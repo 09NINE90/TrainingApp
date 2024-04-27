@@ -21,16 +21,17 @@
         <div class="content">
             <h2>Тренировка</h2>
             <form class="form" id="dynamic-form" method="post">
-                <div class="form-group">
-                    <div class="inputBox">
-                        <input type="text" id = "dayOfWeek" name="dayOfWeek" ><i>Название тренировки</i>
-                    </div>
-                    <div class="inputBox">
-                        <input type="text"  id = "exercises1" name="exercises1" ><i>Упражнение 1</i>
-                    </div>
-                    <div class="inputBox">
-                        <input type="text"  id = "repetitions1" name="repetitions1" ><i>Повторения</i>
-                    </div>
+                <div class="inputBox">
+                    <input type="text" id = "dayOfWeek" name="dayOfWeek" required>
+                    <i>Название тренировки</i>
+                </div>
+                <div class="inputBox">
+                    <input type="text"  id = "exercises1" name="exercises1" required>
+                    <i>Упражнение 1</i>
+                </div>
+                <div class="inputBox">
+                    <input type="text"  id = "repetitions1" name="repetitions1" required>
+                    <i>Повторения</i>
                 </div>
                 <div class="inputBox" id = "add-btn">
                     <input type="submit" value="добавить упражнение">
@@ -56,7 +57,7 @@
 
         const newFormGroup = document.createElement('div');
         newFormGroup.className = 'inputBox';
-        newFormGroup.classList.add('form-group');
+        // newFormGroup.classList.add('form-group');
 
         const newInput1 = document.createElement('input');
         newInput1.type = 'text';
@@ -69,18 +70,23 @@
         newI1.textContent = 'Упражнение ' + counter;
         newFormGroup.appendChild(newI1);
 
+        const newFormGroup2 = document.createElement('div');
+        newFormGroup2.className = 'inputBox';
+        newFormGroup2.classList.add('form-group');
+
         const newInput2 = document.createElement('input');
         newInput2.type = 'text';
         newInput2.name = "repetitions" + counter;
         newInput2.id = "repetitions" + counter;
         newInput2.required = true;
-        newFormGroup.appendChild(newInput2);
+        newFormGroup2.appendChild(newInput2);
 
         const newI2 = document.createElement('i');
         newI2.textContent = 'Повторения';
-        newFormGroup.appendChild(newI2);
+        newFormGroup2.appendChild(newI2);
 
         form.insertBefore(newFormGroup, addInputBtn);
+        form.insertBefore(newFormGroup2, addInputBtn);
 
     });
     submitBtn.addEventListener('click', function(event) {

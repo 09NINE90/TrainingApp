@@ -76,12 +76,12 @@
             <tbody>
                 <tr th:each="reportOfWorkout : ${reportOfWorkoutList}">
                     <td th:text="${#dates.format(reportOfWorkout.date, 'dd/MM/yyyy')}" ></td>
-                    <td class="column-with">
+                    <td>
                         <ul>
                             <li th:each="exercise : ${reportOfWorkout.exercises}" th:text="${exercise}"></li>
                         </ul>
                     </td>
-                    <td class="column-with">
+                    <td>
                         <ul>
                             <li th:each="report : ${reportOfWorkout.reports}" th:text="${report}"></li>
                         </ul>
