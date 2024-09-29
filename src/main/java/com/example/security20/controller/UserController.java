@@ -1,16 +1,11 @@
 package com.example.security20.controller;
 
-import ch.qos.logback.core.util.DelayStrategy;
 import com.example.security20.dto.CustomUserDetails;
 import com.example.security20.dto.UserDTO;
 import com.example.security20.entity.*;
 import com.example.security20.repository.UserPhysicalParametersRepository;
-import com.example.security20.repository.UserRepository;
 import com.example.security20.service.MailService;
-import com.example.security20.service.NutritionService;
 import com.example.security20.service.UserService;
-import com.example.security20.service.WorkoutPlanService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,8 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
